@@ -1,0 +1,81 @@
+$color_body: #53c5ff;
+$color_screen: #e8f2b3;
+$color_pixel: black;
+$pixel_size: 20px;
+$pixel_borderWidth: $pixel_size * (2/13);
+$pixel_margin: $pixel_size * (2/13);
+$pixel_inner_margin: $pixel_size * (2/13);
+$pixel_opacity: 0.1;
+
+body {
+  background-color: $color_body;
+}
+
+#board {
+  position: relative;
+  width: 100%;
+  height: 100%;
+/*			outline: 1px solid red;*/
+  margin: auto;
+/*			background: url(../img/board.jpg) no-repeat;*/
+}
+
+#table {
+  background: $color_screen;
+  margin: auto;
+//  position: absolute;
+/*			outline: 1px solid red;*/
+  left: 173px;
+  top: 99px;
+  border-spacing: $pixel_margin;
+}
+
+td {
+/*  border: 1px solid lime;*/
+  width: $pixel_size;
+  height: $pixel_size;
+//  box-sizing: border-box;
+  border: $pixel_borderWidth solid rgba($color_pixel, $pixel_opacity);
+  position: relative;
+}
+
+td:before {
+  content: '';
+  position: absolute;
+  top: $pixel_inner_margin;
+  bottom: $pixel_inner_margin;
+  left: $pixel_inner_margin;
+  right: $pixel_inner_margin;
+  background-color: rgba($color_pixel, $pixel_opacity);
+}
+
+#messageArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgb(83, 175, 19);
+}
+
+
+form {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  background-color: rgb(83, 175, 19);
+}
+
+input {
+  background-color: rgb(152, 207, 113);
+  border-color: rgb(83, 175, 19);
+  font-size: 1em;
+}
+
+.hit {
+/*  background: black;*/
+  border: $pixel_borderWidth solid rgba($color_pixel, 1);
+}
+
+.hit:before {
+  background-color: rgba($color_pixel, 1);
+}

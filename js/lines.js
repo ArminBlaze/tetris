@@ -3,14 +3,14 @@ window.onload = init;
 //Вешаем события на кнопку и окно ввода после загрузки страницы
 
 function init() {
-	var fireButton = document.getElementById("fireButton");
-	fireButton.onclick = handleFireButton;
-	
-	var form = document.getElementById("form");
-	form.addEventListener("submit", function(e){
-				e.preventDefault();
-				handleFireButton();
-	});
+//	var fireButton = document.getElementById("fireButton");
+//	fireButton.onclick = handleFireButton;
+//	
+//	var form = document.getElementById("form");
+//	form.addEventListener("submit", function(e){
+//				e.preventDefault();
+//				handleFireButton();
+//	});
 	
 	handleCells();
 	model.generateFigure();
@@ -218,7 +218,7 @@ var controller = {
 		var location = this.parseGuess(guess);
 		if (location) var hitLog = this.isHit(location);
 		if(location && hitLog) {
-			alert("You already fired in this cell!");
+			console.log("You already fired in this cell!");
 //			debugger;
 		} else if (location) {
 			this.guesses++;
@@ -233,7 +233,7 @@ var controller = {
 		
 		if (!guess || guess.length !== 2) {
 			debugger;
-			alert("Oops, please enter a letter and a number on the board.")
+			console.log("Oops, please enter a letter and a number on the board.")
 		} else {
 			//перевод буквы в цифру
 			var firstChar = guess.charAt(0);
