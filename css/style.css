@@ -1,54 +1,60 @@
 body {
-			background-color: #000;
-		}
-		
-		#board {
-			position: relative;
-			width: 1024px;
-			height: 863px;
+  background-color: white;
+}
+
+#board {
+  position: relative;
+  width: 1024px;
+  height: 863px;
 /*			outline: 1px solid red;*/
-			margin: auto;
-			background: url(../img/board.jpg) no-repeat;
-		}
-		
-		#messageArea {
-			position: absolute;
-			top: 0;
-			left: 0;
-			color: rgb(83, 175, 19);
-		}
-		
-		table {
-			position: absolute;
+  margin: auto;
+/*			background: url(../img/board.jpg) no-repeat;*/
+}
+
+#table {
+  border: 1px solid red;
+
+}
+
+#table td {
+  border: 1px solid lime;
+}
+
+#messageArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgb(83, 175, 19);
+}
+
+table {
+  position: absolute;
 /*			outline: 1px solid red;*/
-			left: 173px;
-			top: 99px;
-			border-spacing: 0px;
-		}
-		
-		td {
-			width: 94px;
-			height: 94px;
+  left: 173px;
+  top: 99px;
+  border-spacing: 0px;
+}
+
+td {
+  width: 94px;
+  height: 94px;
 /*			outline: 1px solid #419d41;*/
-		}
-		
-		form {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			padding: 15px;
-			background-color: rgb(83, 175, 19);
-		}
-		
-		input {
-			background-color: rgb(152, 207, 113);
-			border-color: rgb(83, 175, 19);
-			font-size: 1em;
-		}
-		
-		.hit {
-			background: url("../img/ship.png") no-repeat center center;
-		}
-		.miss {
-			background: url("../img/miss.png") no-repeat center center;
-		}
+}
+
+form {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  background-color: rgb(83, 175, 19);
+}
+
+input {
+  background-color: rgb(152, 207, 113);
+  border-color: rgb(83, 175, 19);
+  font-size: 1em;
+}
+
+.hit {
+  background: orange;
+}
