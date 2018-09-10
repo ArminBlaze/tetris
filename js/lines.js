@@ -5,16 +5,16 @@ window.onload = init;
 function init() {
 //	var fireButton = document.getElementById("fireButton");
 //	fireButton.onclick = handleFireButton;
-//	
+//
 //	var form = document.getElementById("form");
 //	form.addEventListener("submit", function(e){
 //				e.preventDefault();
 //				handleFireButton();
 //	});
-	
+
 	handleCells();
 	model.generateFigure();
-	
+
 	window.addEventListener("keydown", keyHandle);
 //	window.addEventListener("keyup", keyHandle);
 //	window.addEventListener("keypress", keyHandle);
@@ -25,7 +25,7 @@ function keyHandle (e) {
   var keycode = e.keyCode;
   console.log(keycode);
 	var key = "";
-	
+
 	switch(keycode) {
 			case 37:
 				key = "left";
@@ -40,39 +40,39 @@ function keyHandle (e) {
 				key = "down";
 				break;
 		}
-	
+
 	model.figure.move(key);
 };
 
 function handleCells() {
 	var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
-	
+
 	var table = document.getElementById("table");
 	var trs = table.querySelectorAll("tr");
-	
+
 	for (var i = 0; i < trs.length; i++) {
 		var tr = trs[i];
 		var tds = tr.querySelectorAll("td");
-		
+
 		for (var j = 0; j < tds.length; j++) {
 			//перевод буквы в цифру
 			var row = alphabet[i];
 			var column = j;
 			var td = tds[j];
-			
+
 			td.classList.add("" + row + column);
 			td.onclick = handleTd;
 		}
 	}
-	
+
 }
 
 function handleTd() {
 	//берём класс ячейки, на которой кликнули
 	var guess = this.className;
-	
+
 	//НУЖНО ПЕРЕДАВАТЬ КЛАССЫ
-	
+
 //	console.log(guess);
 	controller.processGuess(guess);
 }
@@ -100,7 +100,7 @@ var view = {
 		var area = document.getElementById("messageArea");
 		area.innerHTML = msg;
 	},
-	
+
 	//location нужно передавать как строку ("01"), иначе JS будет считать это 8-ричным числом
 	displayHit: function(location) {
 		console.log(location);
@@ -109,14 +109,14 @@ var view = {
 //		cell.setAttribute("class", "hit");
 		cell.classList.add("hit");
 	},
-	
+
 	clearCell: function(location) {
 		var location = location + "";
 		var cell = document.getElementById(location);
 //		cell.setAttribute("class", "");
 		cell.classList.remove("hit");
 	},
-	
+
 	refresh: function() {
 		for(var i = 0; i < model.lines.length; i++) {
 			for(var j = 0; j < model.lines[i].length; j++) {
@@ -152,9 +152,9 @@ var model = {
 		[0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0]
 	],
-	
+
 	figure: {},
-	
+
 	fire: function(location) {
 		var row = Math.floor(location / 10);
 		var column = location % 10;
@@ -169,17 +169,17 @@ var model = {
 			view.refresh();
 		}
 	},
-	
+
 	isFullLine: function (row) {
 		for (var i = 0; i < this.lines[row].length; i++) {
 			if(!this.lines[row][i]) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	},
-	
+
 	deleteLine: function (row) {
 		do {
 			this.lines[row] = this.lines[row-1];
@@ -187,18 +187,18 @@ var model = {
 		}while (row >= 1);
 		this.lines[0] = [0, 0, 0, 0, 0, 0, 0];
 	},
-	
+
 	deleteFigure() {
 		this.figure = new Figure();
 		this.figure.init();
 	},
-	
+
 	generateFigure() {
 		this.figure = new Figure();
 		this.figure.init();
 	}
-	
-	
+
+
 }
 
 
@@ -213,7 +213,7 @@ var model = {
 
 var controller = {
 	guesses: 0,
-	
+
 	processGuess: function (guess) {
 		var location = this.parseGuess(guess);
 		if (location) var hitLog = this.isHit(location);
@@ -223,14 +223,14 @@ var controller = {
 		} else if (location) {
 			this.guesses++;
 //			this.hitLog.push(location);
-			
+
 			var hit = model.fire(location);
 		}
 	},
-	
+
 	parseGuess: function (guess) {
 		var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
-		
+
 		if (!guess || guess.length !== 2) {
 			debugger;
 			console.log("Oops, please enter a letter and a number on the board.")
@@ -243,7 +243,7 @@ var controller = {
 				var row = alphabet.indexOf(firstChar);
 			}
 			var column = guess.charAt(1);
-			
+
 			if(!isFinite(row) || !isFinite(column)) {
 				alert("Oops, that isn't on the board.");
 			} else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
@@ -252,14 +252,14 @@ var controller = {
 				return row + column;
 			}
 		}
-		
+
 		return null;
 	},
-	
+
 	isHit: function (location) {
 		var row = +location.charAt(0);
 		var column = +location.charAt(1);
-		
+
 		return (model.lines[row][column]);
 	}
 };
@@ -284,13 +284,13 @@ Figure.prototype.move = function(direction) {
 	} else if (direction == "up") {
 		this.row -= 1;
 	}
-	
+
 	controller.processGuess("" + this.row + this.column);
 };
 
 Figure.prototype.init = function () {
 	controller.processGuess("" + this.row + this.column);
 };
-	
+
 
 

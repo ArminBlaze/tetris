@@ -1,41 +1,36 @@
 import data from './data.js';
-
-let table = document.querySelector(`#table`);
-
-data.init();
+import {Table} from './table.js';
 
 
-let template = document.querySelector(`template`);
+class Application {
 
-let trTemplate;
-let tdTemplate;
+  constructor() {
+    data.init();
+    this.table = new Table();
 
-
-if (`content` in template) { // полифилл под IE11
-  trTemplate = template.content.querySelector(`.screen__row`);
-  tdTemplate = template.content.querySelector(`.screen__cell`);
-} else {
-  trTemplate = template.children[0];
-  tdTemplate = template.children[1];
-}
-
-drawTable(data.currentState, table);
-
-function drawTable(state, elem) {
-  console.log(state);
-
-  let fragment = document.createDocumentFragment();
-
-  for (let i = 0; i < state.rows; i++) {
-    let tr = trTemplate.cloneNode(true);
-    fragment.appendChild(tr);
-
-    for (let j = 0; j < state.cells; j++) {
-      let td = tdTemplate.cloneNode(true);
-      td.id = i+j;
-      tr.appendChild(td);
-    }
+    this.render();
   }
-  
-  elem.appendChild(fragment);
+
+  render() {
+    this.table.getElem();
+//    document.body.append(this.userList.getElem());
+//
+//    this.load();
+//
+//    this.userList.getElem().addEventListener('user-select', this.onUserSelect.bind(this))
+  }
+
+  generateFigure() {
+    this.drawFigure(data.currentState.figures.square);
+  }
+
+  drawFigure(figure) {
+    let coords = figure.coords;
+
+  }
+
 }
+
+let app = new Application();
+
+app.generateFigure();
