@@ -1,4 +1,5 @@
-import data from './data.js';
+import {model} from './model.js';
+import {controller} from './controller.js';
 
 class Table {
   constructor() {
@@ -22,7 +23,7 @@ class Table {
 
     this.template = this.getTemplate();
 
-    this.drawTable(data.currentState, this.elem);
+    this.drawTable(model.currentState, this.elem);
   }
 
   getTemplate() {
@@ -61,7 +62,7 @@ class Table {
 
       for (let j = 0; j < state.cells; j++) {
         let td = this.template.tdTemplate.cloneNode(true);
-        td.id = i + j;
+        td.id = i + `.` + j;
         tr.appendChild(td);
       }
     }

@@ -1,4 +1,5 @@
-import data from './data.js';
+import {model} from './model.js';
+import {controller} from './controller.js';
 
 let view = {
   displayMessage(msg) {
@@ -23,9 +24,9 @@ let view = {
   },
 
   refresh() {
-    for (let i = 0; i < data.currentState.lines.length; i++) {
-      for (let j = 0; j < data.currentState.lines[i].length; j++) {
-        if (data.currentState.lines[i][j]) {
+    for (let i = 0; i < model.currentState.lines.length; i++) {
+      for (let j = 0; j < model.currentState.lines[i].length; j++) {
+        if (model.currentState.lines[i][j]) {
           this.displayHit(i + `` + j);
         } else {
           this.clearCell(i + `` + j);
@@ -34,3 +35,5 @@ let view = {
     }
   }
 };
+
+export {view};
