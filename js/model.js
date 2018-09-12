@@ -10,6 +10,16 @@ class Figure {
     this._currentCoords = coords;
   }
 
+  drawFigure() {
+    this.currentCoords.forEach((item) => {
+      view.displayHit(item);
+    });
+  }
+
+  eraseFigure() {
+    this.currentCoords.forEach((item) => view.clearCell(item));
+  }
+
   move(direction) {
     console.log(direction);
     let coords = this.currentCoords;
@@ -19,18 +29,40 @@ class Figure {
     let canMove = controller.testCoords(newCoords);
     console.log(canMove);
     // если есть препятствие и движение влево-вправо - не двигаем
-    // если есть препятствие и движение вниз - запускаем слияние с кучей
+
 
     // если нет препятствия - отрисовываем фигуру на новом месте
-    if(canMove) {
-      //удаляем текущие пиксели с поля (clearCell())
-      console.log(coords);
-      coords.forEach(item => view.clearCell(item));
-      //записываем новые пиксели в фигуру
+    if (canMove) {
+      // удаляем текущие пиксели с поля (clearCell())
+      this.eraseFigure();
+      // записываем новые пиксели в фигуру
       this.currentCoords = newCoords;
-      //отрисовываем новые пиксели
-      this.currentCoords.forEach(item => view.displayHit(item));
+      // отрисовываем новые пиксели
+      this.drawFigure();
     }
+    // если есть препятствие и движение вниз - запускаем слияние с кучей
+    else if (!canMove && direction === `down`) {
+
+      // записываем координаты фигуры в кучу
+      this.fusionWithMasonry(coords);
+
+      // создаём новую фигуру?
+//      метод model должен удалить фигуру и создать новую
+      model.generateFigure();
+    }
+
+  }
+
+  fusionWithMasonry(coords) {
+    console.log(`Слияние с кучей`);
+    // выполнить слияние с кучей
+    // для каждого пикселя вызвать запись в кучу
+    coords.forEach((item) => model.fire(item));
+
+    // выполнить проверку на полную линию (уже выполняется в методе model.fire)
+    // вызываем перерисовку всего поля (уже выполняется в методе model.fire)
+
+    // удаляем фигуру
 
   }
 
@@ -161,20 +193,15 @@ let model = {
     this.figure.currentCoords = this.figure.calculateRealCoords(`0.${center}`);
     console.log(this.figure.currentCoords);
 
-    this.drawFigure(this.figure);
-  },
-
-  // эта функция отрисовывает фигуру?
-  drawFigure(figure) {
-    figure.currentCoords.forEach((item) => {
-      view.displayHit(item);
-    });
+    this.figure.drawFigure();
   },
 
 
   fire(location) {
-    let row = Math.floor(location / 10);
-    let column = location % 10;
+    let coords = this.splitCoords(location);
+    let row = coords.row;
+    let column = coords.cell;
+
     this.lines[row][column] = 1;
 //		console.log(this.lines);
     view.displayHit(location);
@@ -186,6 +213,10 @@ let model = {
       view.refresh();
     }
   },
+
+//  addToMasonry(pixel) {
+//    console.log(pixel);
+//  },
 
   isFullLine(row) {
     for (let i = 0; i < this.lines[row].length; i++) {
