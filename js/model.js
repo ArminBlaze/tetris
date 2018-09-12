@@ -42,10 +42,7 @@ class Figure {
     }
 
     newCoords = coords.map((item) => {
-      let itemCoords = this.splitCoords(item);
-//      let itemPos = item.split(`.`);
-//      let itemRow = +itemPos[0];
-//      let itemCell = +itemPos[1];
+      let itemCoords = model.splitCoords(item);
       let itemNewPos = (itemCoords.row + rowVector) + `.` + (itemCoords.cell + cellVector);
       return itemNewPos;
     });
@@ -54,27 +51,15 @@ class Figure {
     return newCoords;
   }
 
-  splitCoords(coords) {
-    let itemPos = coords.split(`.`);
-    let itemRow = +itemPos[0];
-    let itemCell = +itemPos[1];
-    return {row: itemRow, cell: itemCell};
-  }
 
   calculateRealCoords(startPos) {
-    let startCoords = this.splitCoords(startPos);
+    let startCoords = model.splitCoords(startPos);
 
-//    startPos = startPos.split(`.`);
-//    let startRow = +startPos[0];
-//    let startCell = +startPos[1];
-    console.log(startPos);
+    console.log(startCoords);
 
     let absoluteCoords = [];
     this.coords.forEach((item) => {
-      let itemCoords = this.splitCoords(item);
-//      let itemPos = item.split(`.`);
-//      let itemRow = +itemPos[0];
-//      let itemCell = +itemPos[1];
+      let itemCoords = model.splitCoords(item);
       let itemAbsolutePos = (itemCoords.row + startCoords.row) + `.` + (itemCoords.cell + startCoords.cell);
       absoluteCoords.push(itemAbsolutePos);
     });
@@ -112,6 +97,15 @@ let model = {
   figures,
   initState,
   currentState,
+  get rows() {
+    return this.currentState.rows;
+  },
+  get cells() {
+    return this.currentState.cells;
+  },
+  get lines() {
+    return this.currentState.lines;
+  },
 
   init() {
     this.currentState = Object.assign({}, this.initState);
@@ -128,6 +122,13 @@ let model = {
     }
     console.log(lines);
     this.currentState.lines = lines;
+  },
+
+  splitCoords(coords) {
+    let itemPos = coords.split(`.`);
+    let itemRow = +itemPos[0];
+    let itemCell = +itemPos[1];
+    return {row: itemRow, cell: itemCell};
   },
 
   pickRandomFigure() {
