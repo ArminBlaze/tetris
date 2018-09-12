@@ -16,8 +16,21 @@ class Figure {
     console.log(coords);
     let newCoords = this.shiftCoords(coords, direction);
     // тестируем новые координаты на пересечение и границу экрана
-    controller.testCoords(newCoords);
-    // отрисовываем фигуру на новом месте
+    let canMove = controller.testCoords(newCoords);
+    console.log(canMove);
+    // если есть препятствие и движение влево-вправо - не двигаем
+    // если есть препятствие и движение вниз - запускаем слияние с кучей
+
+    // если нет препятствия - отрисовываем фигуру на новом месте
+    if(canMove) {
+      //удаляем текущие пиксели с поля (clearCell())
+      console.log(coords);
+      coords.forEach(item => view.clearCell(item));
+      //записываем новые пиксели в фигуру
+      this.currentCoords = newCoords;
+      //отрисовываем новые пиксели
+      this.currentCoords.forEach(item => view.displayHit(item));
+    }
 
   }
 

@@ -36,14 +36,13 @@ let controller = {
     model.figure.move(key);
   },
 
-  //тут нужно тестировать на выход за пределы поля и пересечение с "кучей"
+  // тут нужно тестировать на выход за пределы поля и пересечение с "кучей"
   testCoords(coords) {
-    console.log(coords);
-    //каждый пиксель фигуры нужно протестировать
-    coords.every(item => {
-      this.testPixel(item);
+//    console.log(coords);
+    // каждый пиксель фигуры нужно протестировать
+    return coords.every((item) => {
+      return this.testPixel(item);
     });
-
 
 
 //    if (!isFinite(row) || !isFinite(column)) {
@@ -57,22 +56,23 @@ let controller = {
   },
 
   testPixel(coords) {
-    console.log(coords);
-    //проверка на выход за пределы поля
+//    console.log(coords);
+    // проверка на выход за пределы поля
     let pixelCoords = model.splitCoords(coords);
-    console.log(pixelCoords);
+//    console.log(pixelCoords);
 
     if (pixelCoords.row < 0 || pixelCoords.row >= model.rows || pixelCoords.cell < 0 || pixelCoords.cell >= model.cells) {
-      console.log("пиксель за пределами экрана");
+      console.log(pixelCoords);
+      console.log(`пиксель за пределами экрана`);
       return false;
     }
 
 
-
-    //проверка на пересечение с кучей
-    //model.lines[row][column]
-    if(model.lines[pixelCoords.row][pixelCoords.cell]) {
-      console.log("пересечение с кучей");
+    // проверка на пересечение с кучей
+    // model.lines[row][column]
+    if (model.lines[pixelCoords.row][pixelCoords.cell]) {
+      console.log(pixelCoords);
+      console.log(`пересечение с кучей`);
       return false;
     }
 
