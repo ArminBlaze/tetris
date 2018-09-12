@@ -52,7 +52,7 @@ class Table {
   }
 
   drawTable(state, elem) {
-    console.log(state);
+//    console.log(state);
 
     let fragment = document.createDocumentFragment();
 

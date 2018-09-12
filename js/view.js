@@ -9,7 +9,7 @@ let view = {
 
 	// location нужно передавать как строку ("01"), иначе JS будет считать это 8-ричным числом
   displayHit(location) {
-    console.log(location);
+//    console.log(location);
     location = location + ``;
     let cell = document.getElementById(location);
 //		cell.setAttribute("class", "hit");
