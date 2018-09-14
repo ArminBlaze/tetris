@@ -1,6 +1,7 @@
 import {model} from './model.js';
 import {view} from './view.js';
 import {controller} from './controller.js';
+import utils from './utils';
 
 class Figure {
 
@@ -25,7 +26,7 @@ class Figure {
     console.log(direction);
     let coords = this.currentCoords;
     console.log(coords);
-    let newCoords = this.shiftCoords(coords, direction);
+    let newCoords = this.calculateCoordsAfterMove(coords, direction);
     // тестируем новые координаты на пересечение и границу экрана
     let canMove = controller.testCoords(newCoords);
     console.log(canMove);
@@ -34,12 +35,7 @@ class Figure {
 
     // если нет препятствия - отрисовываем фигуру на новом месте
     if (canMove) {
-      // удаляем текущие пиксели с поля (clearCell())
-      this.eraseFigure();
-      // записываем новые пиксели в фигуру
-      this.currentCoords = newCoords;
-      // отрисовываем новые пиксели
-      this.drawFigure();
+      this.redrawFigure(newCoords);
     }
     // если есть препятствие и движение вниз - запускаем слияние с кучей
     else if (!canMove && direction === `down`) {
@@ -52,6 +48,15 @@ class Figure {
       model.generateFigure();
     }
 
+  }
+
+  redrawFigure(coords) {
+    // удаляем текущие пиксели с поля (clearCell())
+    this.eraseFigure();
+      // записываем новые пиксели в фигуру
+    this.currentCoords = coords;
+      // отрисовываем новые пиксели
+    this.drawFigure();
   }
 
   fusionWithMasonry(coords) {
@@ -67,7 +72,7 @@ class Figure {
 
   }
 
-  shiftCoords(coords, direction) {
+  calculateCoordsAfterMove(coords, direction) {
     let newCoords;
     let rowVector = 0;
     let cellVector = 0;
@@ -114,6 +119,52 @@ class Figure {
     return absoluteCoords;
   }
 
+  rotate() {
+    if (this.rotateCoords.length === 0) {
+      return;
+    }
+		// взять текущее положение фигуры и переключиться на следующее
+    let coords = this.currentCoords;
+
+    let nextRotateIndex = utils.nextIndexInArray(this.rotatePosition, this.rotateCoords);
+
+		// взять вектор следующего положения фигуры
+    let nextRotateVector = this.rotateCoords[nextRotateIndex];
+
+		// сложить текущие координаты с вектором
+//    console.log(coords, nextRotateVector);
+    let coordsAfterRotate = this.sumTwoVectors(coords, nextRotateVector);
+
+		// проверить координаты - можно ли повернуть
+    let canMove = controller.testCoords(coordsAfterRotate);
+    if (!canMove) {
+      return;
+    }
+
+		// если проверка прошла - записать в this.rotatePosition
+    this.rotatePosition = nextRotateIndex;
+
+    // перерисовать фигуру
+    this.redrawFigure(coordsAfterRotate);
+
+  }
+
+  sumTwoVectors(coords1, coords2) {
+//    console.log(coords1, coords2);
+    let newCoords = coords1.map((item, i) => {
+      let splitted1 = model.splitCoords(coords1[i]);
+      let splitted2 = model.splitCoords(coords2[i]);
+//      console.log(splitted1, splitted2);
+
+      let newCoord = (splitted1.row + splitted2.row) + `.` + (splitted1.cell + splitted2.cell);
+//      console.log(newCoord);
+      return newCoord;
+    });
+
+//    console.log(newCoords);
+    return newCoords;
+  }
+
 }
 
 class Square extends Figure {
@@ -124,6 +175,8 @@ class Square extends Figure {
 
   init() {
     this.coords = [`0.0`, `0.1`, `1.0`, `1.1`];
+    this.rotatePosition = 0;
+    this.rotateCoords = [];
   }
 }
 
@@ -135,12 +188,17 @@ class Line extends Figure {
 
   init() {
     this.coords = [`0.-1`, `0.0`, `0.1`, `0.2`];
+    this.rotatePosition = 0;
+    this.rotateCoords = [
+			[`3.-1`, `2.0`, `1.1`, `0.2`],
+			[`-3.1`, `-2.0`, `-1.-1`, `0.-2`]
+    ];
   }
 }
 
 const figures = [
   Square,
-	Line
+  Line
 ];
 
 export {figures};

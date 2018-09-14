@@ -51,10 +51,10 @@ let model = {
   },
 
   pickRandomFigure() {
-		console.log(this.figures.length);
-		let rand = utils.randomInteger(0, this.figures.length-1);
-		
-		return new this.figures[rand];
+//		console.log(this.figures.length);
+    let rand = utils.randomInteger(0, this.figures.length - 1);
+
+    return new this.figures[rand]();
   },
 
   // эта функция должна выбирать одну рандомную фигуру

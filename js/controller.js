@@ -21,7 +21,9 @@ let controller = {
         break;
       case 38:
         e.preventDefault();
-        key = `up`;
+        model.figure.rotate();
+        return;
+//        key = `up`;
         break;
       case 39:
         e.preventDefault();
@@ -61,7 +63,8 @@ let controller = {
     let pixelCoords = model.splitCoords(coords);
 //    console.log(pixelCoords);
 
-    if (pixelCoords.row < 0 || pixelCoords.row >= model.rows || pixelCoords.cell < 0 || pixelCoords.cell >= model.cells) {
+    // убрать pixelCoords.row < 0 чтобы можно было располагать фигуры сверху за экраном
+    if (pixelCoords.row >= model.rows || pixelCoords.cell < 0 || pixelCoords.cell >= model.cells) {
       console.log(pixelCoords);
       console.log(`пиксель за пределами экрана`);
       return false;
@@ -70,7 +73,7 @@ let controller = {
 
     // проверка на пересечение с кучей
     // model.lines[row][column]
-    if (model.lines[pixelCoords.row][pixelCoords.cell]) {
+    if (pixelCoords.row >=0 && model.lines[pixelCoords.row][pixelCoords.cell]) {
       console.log(pixelCoords);
       console.log(`пересечение с кучей`);
       return false;

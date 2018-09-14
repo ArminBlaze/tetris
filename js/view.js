@@ -13,6 +13,7 @@ let view = {
     location = location + ``;
     let cell = document.getElementById(location);
 //		cell.setAttribute("class", "hit");
+    if(!cell) return;
     cell.classList.add(`hit`);
   },
 
@@ -20,6 +21,7 @@ let view = {
     location = location + ``;
     let cell = document.getElementById(location);
 //		cell.setAttribute("class", "");
+    if(!cell) return;
     cell.classList.remove(`hit`);
   },
 
