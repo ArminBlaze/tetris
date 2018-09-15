@@ -27,16 +27,20 @@ class Figure {
   startMoving() {
     this.tick = 1000 -  model.speed*100;
 
-    this.timer = setTimeout(function timerok() {
-      console.log(this);
-      console.log(model);
-      console.log(`Сработал таймер ` + this.timer);
-      //двигаем фигуру вниз
+    this.timer = setInterval(function(){
       this.move(`down`);
+    }.bind(this), this.tick)
 
-      this.tick = 1000 -  model.speed*100;
-      this.timer = setTimeout(timerok.bind(this), this.tick);
-    }.bind(this), model.figure.tick);
+//    this.timer = setTimeout(function timerok() {
+//      console.log(this);
+//      console.log(model);
+//      console.log(`Сработал таймер ` + this.timer);
+//      //двигаем фигуру вниз
+//      this.move(`down`);
+//
+//      this.tick = 1000 -  model.speed*100;
+//      this.timer = setTimeout(timerok.bind(this), this.tick);
+//    }.bind(this), model.figure.tick);
   }
 
   move(direction) {
@@ -188,7 +192,7 @@ class Figure {
   destroy() {
     // убирает таймер и удаляет фигуру\
     console.log('удаляем фигуру', this);
-    clearTimeout(this.timer);
+    clearInterval(this.timer);
   }
 }
 
