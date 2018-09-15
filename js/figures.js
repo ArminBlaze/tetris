@@ -24,6 +24,21 @@ class Figure {
     this.currentCoords.forEach((item) => view.clearCell(item));
   }
 
+  startMoving() {
+    this.tick = 1000 -  model.speed*100;
+
+    this.timer = setTimeout(function timerok() {
+      console.log(this);
+      console.log(model);
+      console.log(`Сработал таймер ` + this.timer);
+      //двигаем фигуру вниз
+      this.move(`down`);
+
+      this.tick = 1000 -  model.speed*100;
+      this.timer = setTimeout(timerok.bind(this), this.tick);
+    }.bind(this), model.figure.tick);
+  }
+
   move(direction) {
 //    console.log(direction);
     let coords = this.currentCoords;
@@ -168,6 +183,12 @@ class Figure {
 
 //    console.log(newCoords);
     return newCoords;
+  }
+
+  destroy() {
+    // убирает таймер и удаляет фигуру\
+    console.log('удаляем фигуру', this);
+    clearTimeout(this.timer);
   }
 }
 

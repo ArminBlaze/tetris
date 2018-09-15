@@ -32,6 +32,12 @@ let model = {
   set score(score) {
     this.currentState.score = score;
   },
+  get speed() {
+    return this.currentState.speed;
+  },
+  set speed(num) {
+    this.currentState.speed = num;
+  },
 
   init() {
     this.currentState = Object.assign({}, this.initState);
@@ -67,6 +73,10 @@ let model = {
   // эта функция должна выбирать одну рандомную фигуру
   generateFigure() {
     // let figure = pickRandomFigure()
+    if(this.figure) {
+      this.figure.destroy();
+    }
+
     this.figure = this.pickRandomFigure();
 
     let coords = this.figure.coords;
@@ -78,6 +88,9 @@ let model = {
 //    console.log(this.figure.currentCoords);
 
     this.figure.drawFigure();
+
+    //запускает таймер движения фигуры
+    this.figure.startMoving();
   },
 
 
