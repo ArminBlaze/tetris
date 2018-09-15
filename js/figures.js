@@ -25,11 +25,11 @@ class Figure {
   }
 
   startMoving() {
-    this.tick = 1000 -  model.speed*100;
+    this.tick = 1000 - model.speed * 100;
 
-    this.timer = setInterval(function(){
+    this.timer = setInterval(function () {
       this.move(`down`);
-    }.bind(this), this.tick)
+    }.bind(this), this.tick);
 
 //    this.timer = setTimeout(function timerok() {
 //      console.log(this);
@@ -92,6 +92,8 @@ class Figure {
     // вызываем перерисовку всего поля (уже выполняется в методе model.fire)
 
     // удаляем фигуру
+//    сортируем, чтобы удалять начиная с верхней линии
+    model.linesToDelete.sort((a, b) => a - b);
     model.linesToDelete.forEach((row) => model.deleteLine(row));
     view.refresh();
   }
@@ -191,7 +193,7 @@ class Figure {
 
   destroy() {
     // убирает таймер и удаляет фигуру\
-    console.log('удаляем фигуру', this);
+    console.log(`удаляем фигуру`, this);
     clearInterval(this.timer);
   }
 }
