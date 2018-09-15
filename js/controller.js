@@ -11,7 +11,7 @@ let controller = {
   keyHandle(e) {
 
     let keycode = e.keyCode;
-    console.log(keycode);
+//    console.log(keycode);
     let key = ``;
 
     switch (keycode) {
@@ -65,8 +65,8 @@ let controller = {
 
     // убрать pixelCoords.row < 0 чтобы можно было располагать фигуры сверху за экраном
     if (pixelCoords.row >= model.rows || pixelCoords.cell < 0 || pixelCoords.cell >= model.cells) {
-      console.log(pixelCoords);
-      console.log(`пиксель за пределами экрана`);
+//      console.log(pixelCoords);
+      console.log(`пиксель пытается попасть за пределы экрана`);
       return false;
     }
 
@@ -74,7 +74,7 @@ let controller = {
     // проверка на пересечение с кучей
     // model.lines[row][column]
     if (pixelCoords.row >=0 && model.lines[pixelCoords.row][pixelCoords.cell]) {
-      console.log(pixelCoords);
+//      console.log(pixelCoords);
       console.log(`пересечение с кучей`);
       return false;
     }

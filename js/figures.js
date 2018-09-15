@@ -3,6 +3,8 @@ import {view} from './view.js';
 import {controller} from './controller.js';
 import utils from './utils';
 
+
+// Прототип с методами
 class Figure {
 
   get currentCoords() {
@@ -23,23 +25,22 @@ class Figure {
   }
 
   move(direction) {
-    console.log(direction);
+//    console.log(direction);
     let coords = this.currentCoords;
-    console.log(coords);
+//    console.log(coords);
     let newCoords = this.calculateCoordsAfterMove(coords, direction);
     // тестируем новые координаты на пересечение и границу экрана
     let canMove = controller.testCoords(newCoords);
-    console.log(canMove);
+//    console.log(canMove);
     // если есть препятствие и движение влево-вправо - не двигаем
 
 
     // если нет препятствия - отрисовываем фигуру на новом месте
     if (canMove) {
       this.redrawFigure(newCoords);
-    }
-    // если есть препятствие и движение вниз - запускаем слияние с кучей
-    else if (!canMove && direction === `down`) {
 
+    // если есть препятствие и движение вниз - запускаем слияние с кучей
+    } else if (!canMove && direction === `down`) {
       // записываем координаты фигуры в кучу
       this.fusionWithMasonry(coords);
 
@@ -61,6 +62,9 @@ class Figure {
 
   fusionWithMasonry(coords) {
     console.log(`Слияние с кучей`);
+    console.log(model.lines);
+
+    model.linesToDelete = [];
     // выполнить слияние с кучей
     // для каждого пикселя вызвать запись в кучу
     coords.forEach((item) => model.fire(item));
@@ -69,7 +73,8 @@ class Figure {
     // вызываем перерисовку всего поля (уже выполняется в методе model.fire)
 
     // удаляем фигуру
-
+    model.linesToDelete.forEach((row) => model.deleteLine(row));
+    view.refresh();
   }
 
   calculateCoordsAfterMove(coords, direction) {
@@ -98,7 +103,7 @@ class Figure {
       return itemNewPos;
     });
 
-    console.log(newCoords);
+//    console.log(newCoords);
     return newCoords;
   }
 
@@ -164,8 +169,10 @@ class Figure {
 //    console.log(newCoords);
     return newCoords;
   }
-
 }
+
+
+// Фигуры
 
 class Square extends Figure {
   constructor() {
@@ -179,6 +186,7 @@ class Square extends Figure {
     this.rotateCoords = [];
   }
 }
+
 
 class Line extends Figure {
   constructor() {
@@ -196,9 +204,81 @@ class Line extends Figure {
   }
 }
 
+class Zeka extends Figure {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.coords = [`1.0`, `1.1`, `0.1`, `0.2`];
+    this.rotatePosition = 0;
+    this.rotateCoords = [
+			[`+2.0`, `+1.+1`, `0.0`, `-1.+1`],
+			[`-2.0`, `-1.-1`, `0.0`, `+1.-1`]
+    ];
+  }
+}
+
+class ZekaReverse extends Figure {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.coords = [`0.0`, `0.1`, `1.1`, `1.2`];
+    this.rotatePosition = 0;
+    this.rotateCoords = [
+			[`-1.-1`, `0.0`, `+1.-1`, `+2.0`],
+			[`+1.+1`, `0.0`, `-1.+1`, `-2.0`]
+    ];
+  }
+}
+
+class Leka extends Figure {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.coords = [`0.0`, `1.0`, `2.0`, `2.1`];
+    this.rotatePosition = 0;
+    this.rotateCoords = [
+			[`-2.+0`, `-1.-1`, `+0.-2`, `+1.-1`],
+			[`+1.+2`, `-0.+1`, `-1.+0`, `-0.-1`],
+			[`+1.+0`, `-0.+1`, `-1.+2`, `-2.+1`],
+			[`+0.-2`, `+1.-1`, `+2.0`, `+1.+1`]
+    ];
+  }
+}
+
+class LekaReverse extends Figure {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.coords = [`0.1`, `1.1`, `2.1`, `2.0`];
+    this.rotatePosition = 0;
+    this.rotateCoords = [
+			[`-1.+1`, `+0.-0`, `+1.-1`, `-0.-2`],
+			[`+2.+1`, `+1.+0`, `-0.-1`, `-1.+0`],
+			[`+0.-2`, `-1.-1`, `-2.+0`, `-1.+1`],
+			[`-1.-0`, `+0.+1`, `+1.+2`, `+2.+1`]
+    ];
+  }
+}
+
 const figures = [
   Square,
-  Line
+  Line,
+  Zeka,
+  ZekaReverse,
+  Leka,
+  LekaReverse
 ];
 
 export {figures};

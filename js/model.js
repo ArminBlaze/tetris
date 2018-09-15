@@ -7,7 +7,8 @@ import utils from './utils';
 const initState = Object.freeze({
   rows: 20,
   cells: 10,
-  speed: 1
+  speed: 1,
+  score: 0
 });
 
 let currentState = null;
@@ -24,6 +25,12 @@ let model = {
   },
   get lines() {
     return this.currentState.lines;
+  },
+  get score() {
+    return this.currentState.score;
+  },
+  set score(score) {
+    this.currentState.score = score;
   },
 
   init() {
@@ -85,9 +92,10 @@ let model = {
     if (this.isFullLine(row)) {
       this.score++;
       console.log(`Score: ` + this.score);
-      this.deleteLine(row);
+//      this.deleteLine(row);
+
+      this.linesToDelete.push(row);
       console.log(this.lines);
-      view.refresh();
     }
   },
 
@@ -106,11 +114,14 @@ let model = {
   },
 
   deleteLine(row) {
+//    debugger;
+    console.log("удаляем линию " + row);
     do {
       this.lines[row] = this.lines[row - 1];
       row--;
     } while (row >= 1);
-    this.lines[0] = [0, 0, 0, 0, 0, 0, 0];
+//    this.lines[0] = [0, 0, 0, 0, 0, 0, 0];
+    this.lines[0] = new Array(model.cells).fill(0);
   }
 };
 
