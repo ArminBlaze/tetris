@@ -1,6 +1,8 @@
 import {model} from './model.js';
 import {controller} from './controller.js';
 
+let linesSpan = document.querySelector('.info__score');
+
 let view = {
   displayMessage(msg) {
     let area = document.getElementById(`messageArea`);
@@ -36,7 +38,12 @@ let view = {
         }
       }
     }
+
+    //пишем сколько линий стерто
+    linesSpan.innerHTML = model.score;
   }
+
+
 };
 
 export {view};
