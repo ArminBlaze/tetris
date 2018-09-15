@@ -7,7 +7,7 @@ import utils from './utils';
 const initState = Object.freeze({
   rows: 20,
   cells: 10,
-  speed: 1,
+  speed: 0,
   score: 0
 });
 

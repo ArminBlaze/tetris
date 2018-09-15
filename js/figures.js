@@ -25,7 +25,10 @@ class Figure {
   }
 
   startMoving() {
-    this.tick = 1000 - model.speed * 100;
+
+    // запуск функции вычисления тика
+    this.tick = this.calculateTickSpeed();
+    view.refreshInfo();
 
     this.timer = setInterval(function () {
       this.move(`down`);
@@ -41,6 +44,19 @@ class Figure {
 //      this.tick = 1000 -  model.speed*100;
 //      this.timer = setTimeout(timerok.bind(this), this.tick);
 //    }.bind(this), model.figure.tick);
+  }
+
+  calculateTickSpeed() {
+    model.speed = Math.floor(model.score / 10);
+    if (model.speed > 9) {
+      model.speed = 9;
+    }
+    // 1000 магическое число - 1секунда. Стандартный таймер
+    // 100 магическое число - шаг ускорения таймера, при повышении уровня скорости
+    // каждые 10 линий фигура ускоряется на 100мс
+    let timerTick = 1000 - model.speed * 100;
+    console.log(timerTick);
+    return timerTick;
   }
 
   move(direction) {

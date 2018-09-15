@@ -2,6 +2,7 @@ import {model} from './model.js';
 import {controller} from './controller.js';
 
 let linesSpan = document.querySelector('.info__score');
+let speedSpan = document.querySelector('.info__speed');
 
 let view = {
   displayMessage(msg) {
@@ -39,8 +40,13 @@ let view = {
       }
     }
 
-    //пишем сколько линий стерто
+
+  },
+
+  refreshInfo() {
+  //пишем сколько линий стерто
     linesSpan.innerHTML = model.score;
+    speedSpan.innerHTML = model.speed;
   }
 
 
