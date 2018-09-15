@@ -272,13 +272,32 @@ class LekaReverse extends Figure {
   }
 }
 
+class Troyka extends Figure {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.coords = [`1.0`, `1.1`, `1.2`, `0.1`];
+    this.rotatePosition = 0;
+    this.rotateCoords = [
+			[`-0.-1`, `+1.-0`, `+2.+1`, `-0.+1`],
+			[`-2.+1`, `-1.+0`, `-0.-1`, `-0.+1`],
+			[`+1.+1`, `-0.-0`, `-1.-1`, `+1.-1`],
+			[`+1.-1`, `+0.+0`, `-1.+1`, `-1.-1`]
+    ];
+  }
+}
+
 const figures = [
   Square,
   Line,
   Zeka,
   ZekaReverse,
   Leka,
-  LekaReverse
+  LekaReverse,
+  Troyka
 ];
 
 export {figures};
