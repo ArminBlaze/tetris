@@ -45,6 +45,14 @@ let model = {
 //    console.log(`init`);
   },
 
+  gameOver() {
+    // тут нужен переход на экран конца игры
+    // но пока можно просто перезапускать игру
+    // значит нужно запустить метод перезапуска игры
+    alert(`Game over!`);
+    model.init();
+  },
+
   generateLines() {
     let lines = [];
     for (let i = 0; i < this.currentState.rows; i++) {
@@ -73,7 +81,7 @@ let model = {
   // эта функция должна выбирать одну рандомную фигуру
   generateFigure() {
     // let figure = pickRandomFigure()
-    if(this.figure) {
+    if (this.figure) {
       this.figure.destroy();
     }
 
@@ -89,7 +97,7 @@ let model = {
 
     this.figure.drawFigure();
 
-    //запускает таймер движения фигуры
+    // запускает таймер движения фигуры
     this.figure.startMoving();
   },
 
@@ -128,7 +136,7 @@ let model = {
 
   deleteLine(row) {
 //    debugger;
-    console.log("удаляем линию " + row);
+    console.log(`удаляем линию ` + row);
     do {
       this.lines[row] = this.lines[row - 1];
       row--;

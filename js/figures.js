@@ -15,6 +15,15 @@ class Figure {
   }
 
   drawFigure() {
+    // протестировать координаты перед отрисовкой, если заняты - конец игры
+    let canMove = controller.testCoords(this.currentCoords);
+
+    if (!canMove) {
+      model.gameOver();
+    }
+
+    view.refresh();
+
     this.currentCoords.forEach((item) => {
       view.displayHit(item);
     });
@@ -111,7 +120,7 @@ class Figure {
 //    сортируем, чтобы удалять начиная с верхней линии
     model.linesToDelete.sort((a, b) => a - b);
     model.linesToDelete.forEach((row) => model.deleteLine(row));
-    view.refresh();
+//    view.refresh();
   }
 
   calculateCoordsAfterMove(coords, direction) {
