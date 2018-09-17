@@ -1,8 +1,8 @@
 import {model} from './model.js';
 import {controller} from './controller.js';
 
-let linesSpan = document.querySelector('.info__score');
-let speedSpan = document.querySelector('.info__speed');
+let linesSpan = document.querySelector(`.info__score`);
+let speedSpan = document.querySelector(`.info__speed`);
 
 let view = {
   displayMessage(msg) {
@@ -16,7 +16,9 @@ let view = {
     location = location + ``;
     let cell = document.getElementById(location);
 //		cell.setAttribute("class", "hit");
-    if(!cell) return;
+    if (!cell) {
+      return;
+    }
     cell.classList.add(`hit`);
   },
 
@@ -24,7 +26,9 @@ let view = {
     location = location + ``;
     let cell = document.getElementById(location);
 //		cell.setAttribute("class", "");
-    if(!cell) return;
+    if (!cell) {
+      return;
+    }
     cell.classList.remove(`hit`);
   },
 
@@ -44,7 +48,7 @@ let view = {
   },
 
   refreshInfo() {
-  //пишем сколько линий стерто
+  // пишем сколько линий стерто
     linesSpan.innerHTML = model.score;
     speedSpan.innerHTML = model.speed;
   }
