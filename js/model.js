@@ -17,6 +17,7 @@ let model = {
   figures,
   initState,
   currentState,
+  paused: false,
   get rows() {
     return this.currentState.rows;
   },
@@ -49,7 +50,7 @@ let model = {
     // тут нужен переход на экран конца игры
     // но пока можно просто перезапускать игру
     // значит нужно запустить метод перезапуска игры
-    alert(`Game over!`);
+    alert(`Game over! \nВы набрали: ${this.score} очков.`);
     model.init();
   },
 
@@ -85,9 +86,18 @@ let model = {
       this.figure.destroy();
     }
 
-    this.figure = this.pickRandomFigure();
+    if (this.nextFigure) {
+      this.figure = this.nextFigure;
+    } else {
+      this.figure = this.pickRandomFigure();
+    }
 
-    let coords = this.figure.coords;
+    this.nextFigure = this.pickRandomFigure();
+
+    console.log("Эта фигура: ", this.figure);
+    console.log("След фигура: ", this.nextFigure);
+
+//    let coords = this.figure.coords;
 //    console.log(coords);
     let center = this.currentState.cells / 2 - 1;
 //    console.log(center);
@@ -96,6 +106,10 @@ let model = {
 //    console.log(this.figure.currentCoords);
 
     this.figure.drawFigure();
+
+    // отрисовать следующую фигуру в окне след фигуры
+    console.log(this.nextFigure);
+    this.nextFigure.drawNextFigure();
 
     // запускает таймер движения фигуры
     this.figure.startMoving();

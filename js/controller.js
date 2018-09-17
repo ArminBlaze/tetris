@@ -1,6 +1,14 @@
 import {view} from './view.js';
 import {model} from './model.js';
 
+const KEYCODES = {
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  ESC: 27
+};
+
 let controller = {
   guesses: 0,
 
@@ -15,23 +23,27 @@ let controller = {
     let key = ``;
 
     switch (keycode) {
-      case 37:
+      case KEYCODES.LEFT:
         e.preventDefault();
         key = `left`;
         break;
-      case 38:
+      case KEYCODES.UP:
         e.preventDefault();
         model.figure.rotate();
         return;
-//        key = `up`;
         break;
-      case 39:
+      case KEYCODES.RIGHT:
         e.preventDefault();
         key = `right`;
         break;
-      case 40:
+      case KEYCODES.DOWN:
         e.preventDefault();
         key = `down`;
+        break;
+      case KEYCODES.ESC:
+        e.preventDefault();
+        model.figure.pause();
+        return;
         break;
     }
 
@@ -73,7 +85,7 @@ let controller = {
 
     // проверка на пересечение с кучей
     // model.lines[row][column]
-    if (pixelCoords.row >=0 && model.lines[pixelCoords.row][pixelCoords.cell]) {
+    if (pixelCoords.row >= 0 && model.lines[pixelCoords.row][pixelCoords.cell]) {
 //      console.log(pixelCoords);
       console.log(`пересечение с кучей`);
       return false;

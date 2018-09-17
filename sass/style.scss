@@ -7,6 +7,10 @@ $pixel_margin: $pixel_size * (2/13);
 $pixel_inner_margin: $pixel_size * (2/13);
 $pixel_opacity: 0.1;
 
+$nextFigureTableSize: ($pixel_size + $pixel_borderWidth*2 + $pixel_margin)+$pixel_margin;
+
+
+
 body {
   background-color: $color_body;
   text-align: center;
@@ -33,6 +37,30 @@ body {
   left: 173px;
   top: 99px;
   border-spacing: $pixel_margin;
+}
+
+#table,
+#info__table {
+
+}
+
+#info__table td {
+  background: $color_screen;
+}
+
+#info__table td:not(.hit):not(:first-child) {
+//  display: none;
+}
+
+.info__nextFigure {
+//  background: $color_screen;
+  width: $nextFigureTableSize*4;
+  height: $nextFigureTableSize*3;
+//  outline: 1px solid black;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 td {

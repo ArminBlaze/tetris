@@ -62,6 +62,7 @@ class Table {
 
       for (let j = 0; j < state.cells; j++) {
         let td = this.template.tdTemplate.cloneNode(true);
+        td.classList.add(`${i + `.` + j}`);
         td.id = i + `.` + j;
         tr.appendChild(td);
       }

@@ -1,8 +1,12 @@
 import {model} from './model.js';
-import {controller} from './controller.js';
+// import {controller} from './controller.js';
 
+let screenTable = document.querySelector(`.screen`);
+let infoTable = document.querySelector(`.info__table`);
 let linesSpan = document.querySelector(`.info__score`);
 let speedSpan = document.querySelector(`.info__speed`);
+// let nextFigureBlock = document.querySelector(`.info__nextFigure`);
+
 
 let view = {
   displayMessage(msg) {
@@ -11,10 +15,36 @@ let view = {
   },
 
 	// location нужно передавать как строку ("01"), иначе JS будет считать это 8-ричным числом
-  displayHit(location) {
+  displayHit(location, area) {
+    if (location[0] === `-`) {
+      return;
+    }
 //    console.log(location);
+    // берем либо экран игры либо экран следующей фигуры
+    if (!area) {
+      area = screenTable;
+    } else {
+      area = infoTable;
+    }
+
     location = location + ``;
-    let cell = document.getElementById(location);
+//    let cell = area.getElementById(location);
+    // экранируем первый символ, т.к. имена классов - цифры
+    let firstLocationNum = `\\3` + location[0] + ` `;
+    let restLocation = location.slice(1);
+    restLocation = restLocation.replace(`.`, `\\.`);
+
+    // ищём ячейку
+    let cell = area.querySelector(`.` + firstLocationNum + restLocation);
+
+    // экранировать первую цифру и точку
+
+//    debugger;
+//    let unicodeNum = location.charCodeAt(0);
+//    let unicodeNum2 = location.charCodeAt(1);
+//    let unicodeNum3 = location.charCodeAt(2);
+//    console.log(String.fromCharCode(unicodeNum,unicodeNum2,unicodeNum3));
+//    let cell = area.getElementsByClassName(`.` + location)[0];
 //		cell.setAttribute("class", "hit");
     if (!cell) {
       return;
@@ -47,10 +77,15 @@ let view = {
 
   },
 
+  refreshNextFigure() {
+    infoTable.querySelectorAll(`td`).forEach(cell => cell.classList.remove(`hit`));
+  },
+
   refreshInfo() {
   // пишем сколько линий стерто
     linesSpan.innerHTML = model.score;
     speedSpan.innerHTML = model.speed;
+//    nextFigureBlock.innerHTML = model.nextFigure;
   }
 
 

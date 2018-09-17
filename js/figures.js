@@ -29,6 +29,17 @@ class Figure {
     });
   }
 
+  drawNextFigure() {
+    // нужно рефрешить окошно след фигуры
+    view.refreshNextFigure();
+
+
+//    и отрисовать след фигуру в окошке, передав параметр - элемент куда отрисовать
+    this.coords.forEach((item) => {
+      view.displayHit(item, `draw nextFigure`);
+    });
+  }
+
   eraseFigure() {
     this.currentCoords.forEach((item) => view.clearCell(item));
   }
@@ -39,9 +50,8 @@ class Figure {
     this.tick = this.calculateTickSpeed();
     view.refreshInfo();
 
-    this.timer = setInterval(function () {
-      this.move(`down`);
-    }.bind(this), this.tick);
+    this.startTimer();
+
 
 //    this.timer = setTimeout(function timerok() {
 //      console.log(this);
@@ -53,6 +63,24 @@ class Figure {
 //      this.tick = 1000 -  model.speed*100;
 //      this.timer = setTimeout(timerok.bind(this), this.tick);
 //    }.bind(this), model.figure.tick);
+  }
+
+  startTimer() {
+    this.timer = setInterval(function () {
+      this.move(`down`);
+    }.bind(this), this.tick);
+  }
+
+  pause() {
+    model.paused = !model.paused;
+
+    if (model.paused) {
+      clearInterval(this.timer);
+      // Добавить надпись ПАУЗА
+      alert(`Пауза`);
+    } else {
+      this.startTimer();
+    }
   }
 
   calculateTickSpeed() {
@@ -157,7 +185,7 @@ class Figure {
   calculateRealCoords(startPos) {
     let startCoords = model.splitCoords(startPos);
 
-//    console.log(startCoords);
+    console.log(startCoords);
 
     let absoluteCoords = [];
     this.coords.forEach((item) => {
@@ -216,6 +244,7 @@ class Figure {
     return newCoords;
   }
 
+
   destroy() {
     // убирает таймер и удаляет фигуру\
     console.log(`удаляем фигуру`, this);
@@ -247,7 +276,7 @@ class Line extends Figure {
   }
 
   init() {
-    this.coords = [`0.-1`, `0.0`, `0.1`, `0.2`];
+    this.coords = [`0.0`, `0.1`, `0.2`, `0.3`];
     this.rotatePosition = 0;
     this.rotateCoords = [
 			[`3.-1`, `2.0`, `1.1`, `0.2`],
