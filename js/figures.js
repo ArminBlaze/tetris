@@ -25,18 +25,38 @@ class Figure {
   }
 
   startMoving() {
-    this.tick = 1000 -  model.speed*100;
 
-    this.timer = setTimeout(function timerok() {
-      console.log(this);
-      console.log(model);
-      console.log(`Сработал таймер ` + this.timer);
-      //двигаем фигуру вниз
+    // запуск функции вычисления тика
+    this.tick = this.calculateTickSpeed();
+    view.refreshInfo();
+
+    this.timer = setInterval(function () {
       this.move(`down`);
+    }.bind(this), this.tick);
 
-      this.tick = 1000 -  model.speed*100;
-      this.timer = setTimeout(timerok.bind(this), this.tick);
-    }.bind(this), model.figure.tick);
+//    this.timer = setTimeout(function timerok() {
+//      console.log(this);
+//      console.log(model);
+//      console.log(`Сработал таймер ` + this.timer);
+//      //двигаем фигуру вниз
+//      this.move(`down`);
+//
+//      this.tick = 1000 -  model.speed*100;
+//      this.timer = setTimeout(timerok.bind(this), this.tick);
+//    }.bind(this), model.figure.tick);
+  }
+
+  calculateTickSpeed() {
+    model.speed = Math.floor(model.score / 10);
+    if (model.speed > 9) {
+      model.speed = 9;
+    }
+    // 1000 магическое число - 1секунда. Стандартный таймер
+    // 100 магическое число - шаг ускорения таймера, при повышении уровня скорости
+    // каждые 10 линий фигура ускоряется на 100мс
+    let timerTick = 1000 - model.speed * 100;
+    console.log(timerTick);
+    return timerTick;
   }
 
   move(direction) {
@@ -88,6 +108,8 @@ class Figure {
     // вызываем перерисовку всего поля (уже выполняется в методе model.fire)
 
     // удаляем фигуру
+//    сортируем, чтобы удалять начиная с верхней линии
+    model.linesToDelete.sort((a, b) => a - b);
     model.linesToDelete.forEach((row) => model.deleteLine(row));
     view.refresh();
   }
@@ -187,8 +209,8 @@ class Figure {
 
   destroy() {
     // убирает таймер и удаляет фигуру\
-    console.log('удаляем фигуру', this);
-    clearTimeout(this.timer);
+    console.log(`удаляем фигуру`, this);
+    clearInterval(this.timer);
   }
 }
 
