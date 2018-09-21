@@ -2,6 +2,7 @@ import {model} from './model.js';
 import {view} from './view.js';
 import {controller} from './controller.js';
 import utils from './utils';
+import {Table} from './table.js';
 
 
 // Прототип с методами
@@ -33,11 +34,55 @@ class Figure {
     // нужно рефрешить окошно след фигуры
     view.refreshNextFigure();
 
+    // вызвать calculateFigureSize и получить размер фигуры
+    this.calculateFigureSize();
 
-//    и отрисовать след фигуру в окошке, передав параметр - элемент куда отрисовать
+    // вызвать функцию генерации таблицы (поля) с указанным размером
+    // она должна получить размер и вернуть элемент
+    this.table = new Table(this.rows, this.cells);
+
+    let table = this.table.getElem();
+    let nextFigureScreen = document.querySelector(`.nextFigure__table`);
+    nextFigureScreen.innerHTML = ``;
+    nextFigureScreen.appendChild(table);
+
+    let coords = this.previewCoords || this.coords;
+
+    view.displayNextFigure(coords);
+//
+  }
+
+  calculateFigureSize() {
+    console.log(`displayNextFigure`, this.coords);
+    // вычислить ширину и высоту фигуры
+    let minCell = 0;
+    let maxCell = 0;
+    let minRow = 0;
+    let maxRow = 0;
+
     this.coords.forEach((item) => {
-      view.displayHit(item, `draw nextFigure`);
+      let coords = model.splitCoords(item);
+//      row: itemRow, cell: itemCell
+      if (coords.cell < minCell) {
+        minCell = coords.cell;
+      }
+      if (coords.cell > maxCell) {
+        maxCell = coords.cell;
+      }
+      if (coords.row < minRow) {
+        minRow = coords.row;
+      }
+      if (coords.row > maxRow) {
+        maxRow = coords.row;
+      }
     });
+
+    let width = (maxCell - minCell) + 1;
+    let height = (maxRow - minRow) + 1;
+
+    console.log(`Width: ` + width, `Height: ` + height);
+    this.cells = width;
+    this.rows = height;
   }
 
   eraseFigure() {
@@ -244,7 +289,6 @@ class Figure {
     return newCoords;
   }
 
-
   destroy() {
     // убирает таймер и удаляет фигуру\
     console.log(`удаляем фигуру`, this);
@@ -276,7 +320,8 @@ class Line extends Figure {
   }
 
   init() {
-    this.coords = [`0.0`, `0.1`, `0.2`, `0.3`];
+    this.coords = [`0.-1`, `0.0`, `0.1`, `0.2`];
+    this.previewCoords = [`0.0`, `0.1`, `0.2`, `0.3`];
     this.rotatePosition = 0;
     this.rotateCoords = [
 			[`3.-1`, `2.0`, `1.1`, `0.2`],

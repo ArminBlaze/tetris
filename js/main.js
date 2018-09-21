@@ -8,13 +8,15 @@ class Application {
   constructor() {
     model.init();
     controller.init();
-    this.table = new Table();
+    this.table = new Table(model.rows, model.cells);
 
     this.render();
   }
 
   render() {
-    this.table.getElem();
+    let table = this.table.getElem();
+    let screen = document.querySelector(`.screen`);
+    screen.appendChild(table);
 
     model.generateFigure();
 //    document.body.append(this.userList.getElem());
@@ -23,9 +25,6 @@ class Application {
 //
 //    this.userList.getElem().addEventListener('user-select', this.onUserSelect.bind(this))
   }
-
-
-
 }
 
 let app = new Application();

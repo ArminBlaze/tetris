@@ -27,7 +27,7 @@ body {
 /*			background: url(../img/board.jpg) no-repeat;*/
 }
 
-#table {
+.screen {
   background: $color_screen;
   margin: auto;
   display: inline-block;
@@ -39,24 +39,18 @@ body {
   border-spacing: $pixel_margin;
 }
 
-#table,
+
 #info__table {
-
+//  outline: 1px solid yellow;
 }
 
-#info__table td {
-  background: $color_screen;
-}
-
-#info__table td:not(.hit):not(:first-child) {
-//  display: none;
-}
-
-.info__nextFigure {
+.nextFigure {
+  margin-top: 10px;
 //  background: $color_screen;
   width: $nextFigureTableSize*4;
-  height: $nextFigureTableSize*3;
+  height: $nextFigureTableSize*4;
 //  outline: 1px solid black;
+//  border: 3px solid black;
   text-align: center;
   display: flex;
   justify-content: space-around;
@@ -68,7 +62,6 @@ td {
   width: $pixel_size;
   height: $pixel_size;
 //  box-sizing: border-box;
-  border: $pixel_borderWidth solid rgba($color_pixel, $pixel_opacity);
   position: relative;
 }
 
@@ -79,6 +72,13 @@ td:before {
   bottom: $pixel_inner_margin;
   left: $pixel_inner_margin;
   right: $pixel_inner_margin;
+}
+
+.screen td:not(.hit){
+  border: $pixel_borderWidth solid rgba($color_pixel, $pixel_opacity);
+}
+
+.screen td:not(.hit):before {
   background-color: rgba($color_pixel, $pixel_opacity);
 }
 

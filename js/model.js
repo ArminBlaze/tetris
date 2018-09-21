@@ -72,6 +72,7 @@ let model = {
     return {row: itemRow, cell: itemCell};
   },
 
+
   pickRandomFigure() {
 //		console.log(this.figures.length);
     let rand = utils.randomInteger(0, this.figures.length - 1);

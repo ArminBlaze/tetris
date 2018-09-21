@@ -1,9 +1,8 @@
-import {model} from './model.js';
-import {controller} from './controller.js';
-
 class Table {
-  constructor() {
-
+  constructor(rows, cells) {
+    this.rows = rows;
+    this.cells = cells;
+    // конструктор должен получать размер таблицы
   }
 
   getElem() {
@@ -14,16 +13,19 @@ class Table {
   }
 
   render() {
-//    let html = _.template(`<div class="user-list"></div>`)();
 //    this.elem = createElementFromHtml(html);
 //
 //    this.elem.addEventListener('click', this);
 
-    this.elem = document.querySelector(`#table`);
+    // тут должен создаваться новый элемент через createElement, а не искаться в документе
+    // либо искаться по селектору, который передан в конструкторе
+//    this.elem = document.querySelector(`#table`);
+    this.elem = document.createDocumentFragment();
 
     this.template = this.getTemplate();
 
-    this.drawTable(model.currentState, this.elem);
+    // это нужно переписать - оно должно получать размер из конструктора, а не брать из модели
+    this.drawTable();
   }
 
   getTemplate() {
@@ -51,16 +53,17 @@ class Table {
     };
   }
 
-  drawTable(state, elem) {
+  // вместо state.rows нужно передавать объект size.rows/size.cells
+  drawTable() {
 //    console.log(state);
 
     let fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < state.rows; i++) {
+    for (let i = 0; i < this.rows; i++) {
       let tr = this.template.trTemplate.cloneNode(true);
       fragment.appendChild(tr);
 
-      for (let j = 0; j < state.cells; j++) {
+      for (let j = 0; j < this.cells; j++) {
         let td = this.template.tdTemplate.cloneNode(true);
         td.classList.add(`${i + `.` + j}`);
         td.id = i + `.` + j;
@@ -68,7 +71,7 @@ class Table {
       }
     }
 
-    elem.appendChild(fragment);
+    this.elem.appendChild(fragment);
   }
 }
 

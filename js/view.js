@@ -2,7 +2,7 @@ import {model} from './model.js';
 // import {controller} from './controller.js';
 
 let screenTable = document.querySelector(`.screen`);
-let infoTable = document.querySelector(`.info__table`);
+let nextFigureScreen = document.querySelector(`.nextFigure__table`);
 let linesSpan = document.querySelector(`.info__score`);
 let speedSpan = document.querySelector(`.info__speed`);
 // let nextFigureBlock = document.querySelector(`.info__nextFigure`);
@@ -24,7 +24,7 @@ let view = {
     if (!area) {
       area = screenTable;
     } else {
-      area = infoTable;
+      area = nextFigureScreen;
     }
 
     location = location + ``;
@@ -78,7 +78,21 @@ let view = {
   },
 
   refreshNextFigure() {
-    infoTable.querySelectorAll(`td`).forEach(cell => cell.classList.remove(`hit`));
+    nextFigureScreen.querySelectorAll(`td`).forEach((cell) => cell.classList.remove(`hit`));
+  },
+
+  displayNextFigure(coords) {
+
+
+    // отрисовать поле нужного размера
+
+    // отрисовать на нём фигуру
+
+
+//     и отрисовать след фигуру в окошке, передав параметр - элемент куда отрисовать
+    coords.forEach((item) => {
+      this.displayHit(item, `draw nextFigure`);
+    });
   },
 
   refreshInfo() {
