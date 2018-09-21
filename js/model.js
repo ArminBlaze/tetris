@@ -3,7 +3,6 @@ import {controller} from './controller.js';
 import {figures} from './figures.js';
 import utils from './utils';
 
-
 const initState = Object.freeze({
   rows: 20,
   cells: 10,
@@ -18,6 +17,8 @@ let model = {
   initState,
   currentState,
   paused: false,
+  HIGH_SCORES_LENGTH: 10,
+  HIGH_SCORES_NAME: `HighScores`,
   get rows() {
     return this.currentState.rows;
   },
@@ -50,8 +51,148 @@ let model = {
     // тут нужен переход на экран конца игры
     // но пока можно просто перезапускать игру
     // значит нужно запустить метод перезапуска игры
-    alert(`Game over! \nВы набрали: ${this.score} очков.`);
+//    alert(`Game over! \nВы набрали: ${this.score} очков.`);
+
+    // записываем highScores
+    this.handleHighScore();
+
+    // выводим таблицу highScores
+    this.showHighScores();
+
     model.init();
+  },
+
+  handleHighScore() {
+
+
+//    utils.getCookie
+//    utils.setCookie
+
+    // Получить пред результат
+
+    let currentScore = this.score;
+
+//    let prevScore = utils.getCookie(`score1`);
+// //    Если текущий больше - обновить
+//    if (!prevScore || prevScore < currentScore) {
+//
+//      utils.setCookie(`score1`, currentScore, {expires: 1 * 365 * 24 * 60 * 60});
+//    }
+//
+// //     setCookie('key2', "", {expires: 1 * 365 * 24 * 60 * 60}); кука на год
+//
+//    this.record = utils.getCookie(`score1`);
+
+
+    // сравнить текущий результат со всеми в массиве рекордов
+    this.compareHighScore();
+
+    //    Если текущий больше - обновить
+    //    if (!prevScore || prevScore < currentScore) {
+//
+//      utils.setCookie(`score1`, currentScore, {expires: 1 * 365 * 24 * 60 * 60});
+//    }
+//
+// //     setCookie('key2', "", {expires: 1 * 365 * 24 * 60 * 60}); кука на год
+//
+//    this.record = utils.getCookie(`score1`);
+  },
+
+  compareHighScore() {
+    // удаляем таблицу рекордов
+//    utils.deleteCookie(this.HIGH_SCORES_NAME);
+
+    // получить массив рекордов
+    let score = this.score;
+    let prevScores = this.getHighScoresArray();
+    this.record = prevScores;
+    console.log(prevScores);
+
+
+    // если массив пуст - создать новый массив и записать текущее значение и имя пользователя
+    if (!prevScores) {
+      prevScores = [this.createHighScore()];
+    }
+    // если массив короче определённого значения - просто добавляем в него рекорд
+//    и сортируем массив
+    else if (prevScores.length < this.HIGH_SCORES_LENGTH) {
+      prevScores.push(this.createHighScore());
+      prevScores.sort((a, b) => b.score - a.score);
+    }
+    // если массив есть - перебираем его и ищем куда вставить текущее значение
+    // если
+    else {
+      // находим первый результат, который меньше текущего
+      let position = false;
+
+      prevScores.some((item, i) => {
+        if (score > item.score) {
+          position = i;
+          return true;
+        }
+      });
+      console.log(position);
+
+      if (position === false) {
+        return prevScores;
+      }
+
+      prevScores.splice(position, 0, this.createHighScore());
+      prevScores.length = this.HIGH_SCORES_LENGTH;
+    }
+
+    this.record = prevScores;
+    this.setHighScoresArray(prevScores);
+  },
+
+  createHighScore() {
+    let name = this.enterUserName();
+    return {name, score: this.score};
+  },
+
+  enterUserName() {
+    let name = prompt(`Введите своё имя:`, ``);
+    return name;
+  },
+
+  setHighScoresArray(arr) {
+    debugger;
+    console.log(arr);
+
+    arr = JSON.stringify(arr);
+//     Преобразование массива в строку:
+//    > JSON.stringify([1, 2])
+//    *returns* '[1, 2]'
+//
+//    Затем мы можем сделать его печеньем:
+//    > $.cookie('cookie', '[1, 2]')
+//
+//    И затем проанализируйте его:
+//    > JSON.parse($.cookie('cookie'))
+//    *returns* [1, 2]
+    utils.setCookie(this.HIGH_SCORES_NAME, arr, {expires: 1 * 365 * 24 * 60 * 60});
+  },
+
+
+  getHighScoresArray() {
+    let cookie = utils.getCookie(this.HIGH_SCORES_NAME);
+    console.log(cookie);
+    if (cookie) {
+      return JSON.parse(cookie);
+    } else {
+      return null;
+    }
+  },
+
+
+  showHighScores() {
+    let record = this.record;
+    console.log();
+    alert(`Game over!
+Вы набрали: ${this.score} очков.
+Рекорд: ${this.record[0].name} - ${this.record[0].score}`);
+
+    debugger;
   },
 
   generateLines() {
@@ -95,8 +236,8 @@ let model = {
 
     this.nextFigure = this.pickRandomFigure();
 
-    console.log("Эта фигура: ", this.figure);
-    console.log("След фигура: ", this.nextFigure);
+    console.log(`Эта фигура: `, this.figure);
+    console.log(`След фигура: `, this.nextFigure);
 
 //    let coords = this.figure.coords;
 //    console.log(coords);
