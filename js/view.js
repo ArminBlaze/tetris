@@ -1,14 +1,28 @@
 import {model} from './model.js';
 // import {controller} from './controller.js';
 
-let screenTable = document.querySelector(`.screen`);
-let nextFigureScreen = document.querySelector(`.nextFigure__table`);
-let linesSpan = document.querySelector(`.info__score`);
-let speedSpan = document.querySelector(`.info__speed`);
-// let nextFigureBlock = document.querySelector(`.info__nextFigure`);
+import screenStart from './screens/screenStart.js';
+import screenGame from './screens/screenGame.js';
+import screenScore from './screens/screenScore.js';
+
+const screens = {
+  screenStart,
+  screenGame,
+  screenScore
+};
+
+let board = document.querySelector(`#board`);
+// let screenTable = document.querySelector(`.screen`);
+// let nextFigureScreen = document.querySelector(`.nextFigure__table`);
+// let linesSpan = document.querySelector(`.info__score`);
+// let speedSpan = document.querySelector(`.info__speed`);
 
 
 let view = {
+  init() {
+    this.renderScreen(`screenStart`);
+  },
+
   displayMessage(msg) {
     let area = document.getElementById(`messageArea`);
     area.innerHTML = msg;
@@ -22,9 +36,9 @@ let view = {
 //    console.log(location);
     // берем либо экран игры либо экран следующей фигуры
     if (!area) {
-      area = screenTable;
+      area = screenGame.screenTable;
     } else {
-      area = nextFigureScreen;
+      area = screenGame.nextFigureScreen;
     }
 
     location = location + ``;
@@ -78,7 +92,7 @@ let view = {
   },
 
   refreshNextFigure() {
-    nextFigureScreen.querySelectorAll(`td`).forEach((cell) => cell.classList.remove(`hit`));
+    screenGame.nextFigureScreen.querySelectorAll(`td`).forEach((cell) => cell.classList.remove(`hit`));
   },
 
   displayNextFigure(coords) {
@@ -97,9 +111,22 @@ let view = {
 
   refreshInfo() {
   // пишем сколько линий стерто
-    linesSpan.innerHTML = model.score;
-    speedSpan.innerHTML = model.speed;
+    screenGame.linesSpan.innerHTML = model.score;
+    screenGame.speedSpan.innerHTML = model.speed;
 //    nextFigureBlock.innerHTML = model.nextFigure;
+  },
+
+  getElementFromTemplate(template) {
+    let container = document.createElement(`template`);
+    container.innerHTML = template;
+    return container.content;
+  },
+
+  renderScreen(name) {
+    let elem = screens[name].getElem();
+    board.innerHTML = ``;
+    board.appendChild(elem);
+    console.log(screens);
   }
 
 

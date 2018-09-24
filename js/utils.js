@@ -81,6 +81,7 @@ function deleteCookie(name) {
   });
 }
 
+
 export default {
   randomInteger,
   nextIndexInArray,

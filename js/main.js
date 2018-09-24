@@ -1,6 +1,6 @@
 import {model} from './model.js';
 import {controller} from './controller.js';
-import {Table} from './table.js';
+import {view} from './view.js';
 
 
 class Application {
@@ -8,17 +8,13 @@ class Application {
   constructor() {
     model.init();
     controller.init();
-    this.table = new Table(model.rows, model.cells);
+
 
     this.render();
   }
 
   render() {
-    let table = this.table.getElem();
-    let screen = document.querySelector(`.screen`);
-    screen.appendChild(table);
-
-    model.generateFigure();
+    view.init();
 //    document.body.append(this.userList.getElem());
 //
 //    this.load();
