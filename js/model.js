@@ -44,7 +44,7 @@ let model = {
   init() {
     this.currentState = Object.assign({}, this.initState);
     this.generateLines();
-//    console.log(`init`);
+    this.gameInProgress = true;
   },
 
   gameOver() {
@@ -53,18 +53,20 @@ let model = {
     // значит нужно запустить метод перезапуска игры
 //    alert(`Game over! \nВы набрали: ${this.score} очков.`);
 
+    this.gameInProgress = false;
+    controller.deactivate();
+
     // записываем highScores
     this.handleHighScore();
 
-    // выводим таблицу highScores
-    this.showHighScores();
+    // переключаем экран и там уже выводим таблицу
+    view.renderScreen(`screenScore`);
 
-    model.init();
+    // выводим таблицу highScores
+    // Этот метод нужно перенести в экран
   },
 
   handleHighScore() {
-
-
 //    utils.getCookie
 //    utils.setCookie
 
@@ -185,16 +187,6 @@ let model = {
   },
 
 
-  showHighScores() {
-    let record = this.record;
-    console.log();
-    alert(`Game over!
-Вы набрали: ${this.score} очков.
-Рекорд: ${this.record[0].name} - ${this.record[0].score}`);
-
-    debugger;
-  },
-
   generateLines() {
     let lines = [];
     for (let i = 0; i < this.currentState.rows; i++) {
@@ -221,12 +213,17 @@ let model = {
     return new this.figures[rand]();
   },
 
+
   // эта функция должна выбирать одну рандомную фигуру
   generateFigure() {
     // let figure = pickRandomFigure()
     if (this.figure) {
       this.figure.destroy();
     }
+
+    //если игра закончилась, ничего не создавать
+    if(!this.gameInProgress) return;
+//    debugger;
 
     if (this.nextFigure) {
       this.figure = this.nextFigure;

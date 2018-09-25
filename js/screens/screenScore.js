@@ -1,3 +1,4 @@
+import {model} from '../model.js';
 import {view} from '../view.js';
 
 const template = `<div>High Scores</div>
@@ -21,10 +22,17 @@ function getElem() {
   const elem = view.getElementFromTemplate(template);
   const button = elem.querySelector(`.main-play`);
   button.onclick = function () {
-    view.renderScreen(`game`);
+    model.init();
+    view.renderScreen(`screenGame`);
   };
 
+  setTimeout(init, 0);
+
   return elem;
+}
+
+function init () {
+  view.showHighScores();
 }
 
 export default {

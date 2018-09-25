@@ -1,6 +1,7 @@
 import {view} from '../view.js';
 import {Table} from '../table.js';
 import {model} from '../model.js';
+import {controller} from '../controller.js';
 
 const template = `<table id="table" class="screen"></table>
   <div class="info" id="messageArea">
@@ -60,11 +61,13 @@ function getElem() {
 }
 
 function init() {
+
   _screenTable = document.querySelector(`.screen`);
   _nextFigureScreen = document.querySelector(`.nextFigure__table`);
   _linesSpan = document.querySelector(`.info__score`);
   _speedSpan = document.querySelector(`.info__speed`);
   model.generateFigure();
+  controller.init();
 }
 
 // let screenTable = document.querySelector(`.screen`);
