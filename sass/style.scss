@@ -57,7 +57,8 @@ body {
   align-items: center;
 }
 
-td {
+.screen td,
+#messageArea td {
 /*  border: 1px solid lime;*/
   width: $pixel_size;
   height: $pixel_size;
@@ -65,7 +66,8 @@ td {
   position: relative;
 }
 
-td:before {
+.screen td:before,
+#messageArea td:before {
   content: '';
   position: absolute;
   top: $pixel_inner_margin;
@@ -116,4 +118,12 @@ input {
 
 .hit:before {
   background-color: rgba($color_pixel, 1);
+}
+
+.score {
+  text-align: left;
+}
+
+.score td {
+  outline: 1px solid black;
 }

@@ -127,15 +127,9 @@ let view = {
     board.innerHTML = ``;
     board.appendChild(elem);
     console.log(screens);
-  },
-
-  showHighScores() {
-    let record = model.record;
-    console.log(`Game over!
-Вы набрали: ${model.score} очков.
-Рекорд: ${model.record[0].name} - ${model.record[0].score}`);
-    debugger;
   }
+
+
 
 };
 
