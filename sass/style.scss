@@ -2,9 +2,9 @@ $color_body: #53c5ff;
 $color_screen: #e8f2b3;
 $color_pixel: black;
 $pixel_size: 20px;
-$pixel_borderWidth: $pixel_size * (2/13);
-$pixel_margin: $pixel_size * (2/13);
-$pixel_inner_margin: $pixel_size * (2/13);
+$pixel_borderWidth: 3px;
+$pixel_margin: 3px;
+$pixel_inner_margin: 3px;
 $pixel_opacity: 0.1;
 
 $nextFigureTableSize: ($pixel_size + $pixel_borderWidth*2 + $pixel_margin)+$pixel_margin;
