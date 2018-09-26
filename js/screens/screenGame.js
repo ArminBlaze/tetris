@@ -12,7 +12,6 @@ const template = `<table id="table" class="screen"></table>
       Скорость: <span class="info__speed">0</span>
     </div>
     <div class="info__block">
-      Следующая фигура:
       <div class="nextFigure">
         <table id="nextFigure__table" class="nextFigure__table">
         </table>
@@ -20,20 +19,6 @@ const template = `<table id="table" class="screen"></table>
     </div>
   </div>`;
 
-
-// import screensController from '../screensController.js';
-//
-// const template = `<section class="main main--welcome">
-//    <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
-//    <button class="main-play">Начать игру</button>
-//    <h2 class="title main-title">Правила игры</h2>
-//    <p class="text main-text">
-//      Правила просты&nbsp;— за&nbsp;2 минуты дать
-//      максимальное количество правильных ответов.<br>
-//      Удачи!
-//    </p>
-//  </section>`;
-//
 let _screenTable;
 let _nextFigureScreen;
 let _linesSpan;

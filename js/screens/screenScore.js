@@ -5,6 +5,7 @@ const template = (highScore) => `<div class="score">
 <h1>High Scores</h1>\
 <p>Вы набрали: <span class="score__currentRecord">${highScore.score}</span> очков.</p>
 <table class="score__table">
+<tr><th>Игрок</th><th>Линии</th></tr>
 ${highScore.record.map((item) => {
   return `<tr  class="score__row">
           <td  class="score__cell score__cell_name">${item.name}</td>

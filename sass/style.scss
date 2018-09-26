@@ -25,10 +25,15 @@ body {
 /*			outline: 1px solid red;*/
 //  margin: auto;
 /*			background: url(../img/board.jpg) no-repeat;*/
+//  background: url(../img/tetris_background.gif) no-repeat;
+//  background-size: 100% auto;
+  outline: 1px solid black;
+  background: $color_screen;
+  box-shadow: inset 10px 10px 3px rgba(black, 0.5);
+  padding: 10px;
 }
 
 .screen {
-  background: $color_screen;
   margin: auto;
   display: inline-block;
   vertical-align: top;
@@ -37,6 +42,9 @@ body {
   left: 173px;
   top: 99px;
   border-spacing: $pixel_margin;
+  border: 4px solid black;
+  border-left: none;
+
 }
 
 
@@ -49,7 +57,7 @@ body {
 //  background: $color_screen;
   width: $nextFigureTableSize*4;
   height: $nextFigureTableSize*4;
-//  outline: 1px solid black;
+  outline: 1px solid black;
 //  border: 3px solid black;
   text-align: center;
   display: flex;
@@ -58,7 +66,7 @@ body {
 }
 
 .screen td,
-#messageArea td {
+.info td {
 /*  border: 1px solid lime;*/
   width: $pixel_size;
   height: $pixel_size;
@@ -67,7 +75,7 @@ body {
 }
 
 .screen td:before,
-#messageArea td:before {
+.info td:before {
   content: '';
   position: absolute;
   top: $pixel_inner_margin;
@@ -84,7 +92,7 @@ body {
   background-color: rgba($color_pixel, $pixel_opacity);
 }
 
-#messageArea {
+.info {
 //  position: absolute;
   top: 0;
   left: 0;
@@ -92,8 +100,9 @@ body {
   color: rgb(0, 0, 0);
   display: inline-block;
   vertical-align: top;
-  padding: 10px 20px;
+//  padding: 10px 20px;
   text-align: left;
+  outline: 1px solid lime;
 }
 
 
@@ -121,9 +130,16 @@ input {
 }
 
 .score {
-  text-align: left;
+  text-align: center;
+}
+
+.score__table {
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .score td {
   outline: 1px solid black;
+  padding: 5px;
 }
