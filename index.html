@@ -7,8 +7,33 @@
 <body>
   <div class="tetris">
     <div id="board">
+      <table id="table" class="screen"></table>
+      <div class="info" id="messageArea">
+        <div class="info__block">
+          Линии: <span class="info__score">0</span>
+        </div>
+        <div class="info__block">
+          Скорость: <span class="info__speed">0</span>
+        </div>
+        <div class="info__block">
+          <div class="nextFigure">
+            <table id="nextFigure__table" class="nextFigure__table">
+            </table>
+          </div>
+        </div>
       </div>
+
+      <div class="overlay overlay__start">
+        <div>Tetris</div>
+        <button type="button" class="main-play">Start Game</button>
+      </div>
+
+      <div class="overlay overlay__score hidden">
+      </div>
+    </div>
   </div>
+
+
 
 	<template style="display: none">
     <tr class="screen__row"></tr>

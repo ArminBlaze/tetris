@@ -12,15 +12,17 @@ const screens = {
 };
 
 let board = document.querySelector(`#board`);
-// let screenTable = document.querySelector(`.screen`);
-// let nextFigureScreen = document.querySelector(`.nextFigure__table`);
-// let linesSpan = document.querySelector(`.info__score`);
-// let speedSpan = document.querySelector(`.info__speed`);
+let screenTable = document.querySelector(`.screen`);
+let nextFigureScreen = document.querySelector(`.nextFigure__table`);
+let linesSpan = document.querySelector(`.info__score`);
+let speedSpan = document.querySelector(`.info__speed`);
 
 
 let view = {
   init() {
-    this.renderScreen(`screenStart`);
+//    this.renderScreen(`screenStart`);
+//    this.showOverlay(`start`);
+    this.overlay = document.querySelector(`.overlay__start`);
   },
 
   displayMessage(msg) {
@@ -36,9 +38,11 @@ let view = {
 //    console.log(location);
     // берем либо экран игры либо экран следующей фигуры
     if (!area) {
-      area = screenGame.screenTable;
+//      area = screenGame.screenTable;
+      area = screenTable;
     } else {
-      area = screenGame.nextFigureScreen;
+//      area = screenGame.nextFigureScreen;
+      area = nextFigureScreen;
     }
 
     location = location + ``;
@@ -92,7 +96,7 @@ let view = {
   },
 
   refreshNextFigure() {
-    screenGame.nextFigureScreen.querySelectorAll(`td`).forEach((cell) => cell.classList.remove(`hit`));
+    nextFigureScreen.querySelectorAll(`td`).forEach((cell) => cell.classList.remove(`hit`));
   },
 
   displayNextFigure(coords) {
@@ -111,8 +115,8 @@ let view = {
 
   refreshInfo() {
   // пишем сколько линий стерто
-    screenGame.linesSpan.innerHTML = model.score;
-    screenGame.speedSpan.innerHTML = model.speed;
+    linesSpan.innerHTML = model.score;
+    speedSpan.innerHTML = model.speed;
 //    nextFigureBlock.innerHTML = model.nextFigure;
   },
 
@@ -122,15 +126,34 @@ let view = {
     return container.content;
   },
 
-  renderScreen(name) {
+  renderScreen(name, parent) {
     let elem = screens[name].getElem();
-    board.innerHTML = ``;
-    board.appendChild(elem);
-    console.log(screens);
+    parent.innerHTML = ``;
+    parent.appendChild(elem);
+  },
+
+  // принимаем имя оверлея на вход и ищём его по классу
+  // name => querySelector(`.overlay++` + name);
+  showOverlay(name) {
+
+    // меняем классы у существуюущих в разметке элементов с классом .overlay
+    // например - .overlay .overlay__start .hidden
+    // удаляем .hidden - этот экран становится виден
+    if (this.overlay) {
+      this.hideOverlay();
+    }
+
+    this.overlay = document.querySelector(`.overlay__` + name);
+    this.overlay.classList.remove(`hidden`);
+
+//    board.innerHTML = ``;
+//    board.appendChild(elem);
+//    console.log(screens);
+  },
+
+  hideOverlay() {
+    this.overlay.classList.add(`hidden`);
   }
-
-
-
 };
 
 export {view};

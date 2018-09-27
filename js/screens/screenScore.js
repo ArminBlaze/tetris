@@ -26,7 +26,8 @@ function getElem() {
   const button = elem.querySelector(`.score__replay`);
   button.onclick = function () {
     model.init();
-    view.renderScreen(`screenGame`);
+//    view.renderScreen(`screenGame`);
+    model.startGame();
   };
 
 //  setTimeout(init, 0);

@@ -1,8 +1,8 @@
 import {view} from '../view.js';
 import {model} from '../model.js';
 
-const template = `<div>Tetris</div>
-<button type="button" class="main-play">Start Game</button>`;
+
+const template = ``;
 
 // import screensController from '../screensController.js';
 //
@@ -19,6 +19,13 @@ const template = `<div>Tetris</div>
 //
 //
 function getElem() {
+//  let table = new Table(model.rows, model.cells);
+
+//  let tableElem = table.getElem();
+
+//  let screen = document.querySelector(`.screen`);
+//  screen.appendChild(tableElem);
+
   const elem = view.getElementFromTemplate(template);
   const button = elem.querySelector(`.main-play`);
   button.onclick = function () {

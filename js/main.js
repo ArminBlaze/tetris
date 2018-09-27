@@ -1,6 +1,7 @@
 import {model} from './model.js';
-
+import {Table} from './table.js';
 import {view} from './view.js';
+import {controller} from './controller.js';
 
 
 class Application {
@@ -8,18 +9,18 @@ class Application {
   constructor() {
     model.init();
 
-
+    this.table = new Table(model.rows, model.cells);
 
     this.render();
   }
 
   render() {
+    let table = this.table.getElem();
+    let screen = document.querySelector(`.screen`);
+    screen.appendChild(table);
+
     view.init();
-//    document.body.append(this.userList.getElem());
-//
-//    this.load();
-//
-//    this.userList.getElem().addEventListener('user-select', this.onUserSelect.bind(this))
+    controller.init();
   }
 }
 

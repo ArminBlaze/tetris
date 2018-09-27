@@ -47,6 +47,12 @@ let model = {
     this.gameInProgress = true;
   },
 
+  startGame() {
+    view.hideOverlay();
+    model.generateFigure();
+    controller.activate();
+  },
+
   gameOver() {
     // тут нужен переход на экран конца игры
     // но пока можно просто перезапускать игру
@@ -60,7 +66,11 @@ let model = {
     this.handleHighScore();
 
     // переключаем экран и там уже выводим таблицу
-    view.renderScreen(`screenScore`);
+    //создаём оверлей
+    view.showOverlay(`score`);
+
+    //пишем в оверлей таблицу
+    view.renderScreen(`screenScore`, document.querySelector(`.overlay__score`));
 
     // выводим таблицу highScores
     // Этот метод нужно перенести в экран

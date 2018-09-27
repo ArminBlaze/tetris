@@ -12,6 +12,13 @@ let controller = {
   guesses: 0,
 
   init() {
+    let startButton = document.querySelector(`.main-play`);
+    startButton.onclick = function () {
+      model.startGame();
+    };
+  },
+
+  activate() {
     window.addEventListener(`keydown`, this.keyHandle);
   },
 
@@ -112,34 +119,6 @@ let controller = {
       let hit = model.fire(location);
     }
   },
-
-//  parseGuess(guess) {
-//    let alphabet = [`A`, `B`, `C`, `D`, `E`, `F`, `G`];
-//
-//    if (!guess || guess.length !== 2) {
-//      debugger;
-//      console.log(`Oops, please enter a letter and a number on the board.`);
-//    } else {
-//			// перевод буквы в цифру
-//      let firstChar = guess.charAt(0);
-//      if (isFinite(firstChar)) {
-//        var row = firstChar;
-//      } else {
-//        var row = alphabet.indexOf(firstChar);
-//      }
-//      let column = guess.charAt(1);
-//
-//      if (!isFinite(row) || !isFinite(column)) {
-//        alert(`Oops, that isn't on the board.`);
-//      } else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
-//        alert(`Oops, that's off the board!`);
-//      } else {
-//        return row + column;
-//      }
-//    }
-//
-//    return null;
-//  },
 
   isHit(location) {
     let row = +location.charAt(0);
