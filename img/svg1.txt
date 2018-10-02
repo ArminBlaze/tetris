@@ -1,0 +1,93 @@
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_125">
+   <g id="svg_32">
+    <g id="svg_15">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="313.25" width="50" height="50" id="svg_16"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="325.75" width="25" height="25" id="svg_17"/>
+    </g>
+    <g id="svg_22">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="251.25" width="50" height="50" id="svg_23"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="263.75" width="25" height="25" id="svg_24"/>
+    </g>
+    <g id="svg_25">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="190.25" width="50" height="50" id="svg_26"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="202.75" width="25" height="25" id="svg_27"/>
+    </g>
+    <g id="svg_29">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="61.99997" y="251.25" width="50" height="50" id="svg_30"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="74.49997" y="263.75" width="25" height="25" id="svg_31"/>
+    </g>
+   </g>
+   <g id="svg_47">
+    <g id="svg_35">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="378.00003" width="50" height="50" id="svg_36"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="390.50003" width="25" height="25" id="svg_37"/>
+    </g>
+    <g id="svg_38">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="61.99997" y="378.00003" width="50" height="50" id="svg_39"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="74.49997" y="390.50003" width="25" height="25" id="svg_40"/>
+    </g>
+    <g id="svg_41">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="440.00003" width="50" height="50" id="svg_42"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="452.50003" width="25" height="25" id="svg_43"/>
+    </g>
+    <g id="svg_44">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="61.99997" y="440.00003" width="50" height="50" id="svg_45"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="74.49997" y="452.50003" width="25" height="25" id="svg_46"/>
+    </g>
+   </g>
+   <g id="svg_63">
+    <g id="svg_60">
+     <g id="svg_3">
+      <rect id="svg_4" fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="504.25002" width="50" height="50"/>
+      <rect id="svg_18" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="516.75002" width="25" height="25"/>
+     </g>
+     <g id="svg_19">
+      <rect id="svg_28" fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="565.25002" width="50" height="50"/>
+      <rect id="svg_33" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="577.75002" width="25" height="25"/>
+     </g>
+     <g id="svg_48">
+      <rect id="svg_49" fill="none" stroke="#ffffff" stroke-width="5" x="61.99997" y="565.25002" width="50" height="50"/>
+      <rect id="svg_50" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="74.49997" y="577.75002" width="25" height="25"/>
+     </g>
+    </g>
+    <g id="svg_61">
+     <g id="svg_51">
+      <rect id="svg_52" fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="627.25002" width="50" height="50"/>
+      <rect id="svg_53" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="639.75002" width="25" height="25"/>
+     </g>
+     <g id="svg_54">
+      <rect id="svg_55" fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="688.25002" width="50" height="50"/>
+      <rect id="svg_56" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="700.75002" width="25" height="25"/>
+     </g>
+     <g id="svg_57">
+      <rect id="svg_58" fill="none" stroke="#ffffff" stroke-width="5" x="61.99997" y="688.25002" width="50" height="50"/>
+      <rect id="svg_59" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="74.49997" y="700.75002" width="25" height="25"/>
+     </g>
+    </g>
+   </g>
+   <g id="svg_111">
+    <g id="svg_5">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="61.99997" width="50" height="50" id="svg_1"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="74.49997" y="12.5" width="25" height="25" id="svg_2"/>
+    </g>
+    <g id="svg_6">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="61.99997" y="61" width="50" height="50" id="svg_7"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="74.49997" y="73.5" width="25" height="25" id="svg_8"/>
+    </g>
+    <g id="svg_9">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="61" width="50" height="50" id="svg_10"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="73.5" width="25" height="25" id="svg_11"/>
+    </g>
+    <g id="svg_12">
+     <rect fill="none" stroke="#ffffff" stroke-width="5" x="-0.00003" y="123" width="50" height="50" id="svg_13"/>
+     <rect fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="12.49997" y="135.5" width="25" height="25" id="svg_14"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
