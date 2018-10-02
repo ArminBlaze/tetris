@@ -18,6 +18,7 @@ body {
 	margin: 0;
 //	font-weight: bold;
 	font-size: 24px;
+  overflow-x: hidden;
 }
 
 .tetris {
@@ -34,11 +35,13 @@ body {
 	border-top-left-radius: 8%;
 	border-top-right-radius: 8%;
 	position: relative;
+
+//  transform: scale(0.5);
+  transform-origin: 50% 0;
 }
 
 .tetris:before {
-	border-top-left-radius: 8%;
-	border-top-right-radius: 8%;
+  border-radius: inherit;
 	content: '';
 	position: absolute;
 	top: 0;
@@ -50,6 +53,7 @@ body {
 }
 
 #board {
+  min-width: 451px;
   display: inline-block;
   vertical-align: top;
   position: relative;
@@ -64,7 +68,7 @@ body {
   background: $color_screen;
   box-shadow: inset 10px 10px 3px rgba(black, 0.5);
   padding: 10px;
-	outline: inset 60px #53c5ff
+	outline: inset 60px #53c5ff;
 }
 
 #board:before {
@@ -75,7 +79,7 @@ body {
   top: -87px;
   left: -93px;
   right: -93px;
-  bottom: -70px;
+  bottom: -72px;
   z-index: 0;
 }
 
@@ -96,7 +100,7 @@ body {
      content: "";
     position: relative;
     display: inline-block;
-    width: 46%;
+    width: 45.95%;
     height: 10px;
     vertical-align: middle;
     background: white;
@@ -210,6 +214,10 @@ input {
   text-align: center;
 	font-weight: bold;
 	font-size: 18px;
+}
+
+.score__title {
+  font-size: 36px;
 }
 
 .score__table {

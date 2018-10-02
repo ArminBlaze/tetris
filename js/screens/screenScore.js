@@ -2,8 +2,8 @@ import {model} from '../model.js';
 import {view} from '../view.js';
 
 const template = (highScore) => `<div class="score">
-<h1>High Scores</h1>\
-<p>Вы набрали: <span class="score__currentRecord">${highScore.score}</span> очков.</p>
+<h1 class="score__title">High Scores</h1>\
+<p>Вы набрали: <span class="score__currentRecord">${highScore.score}</span></p>
 <table class="score__table">
 <tr><th>Игрок</th><th>Линии</th></tr>
 ${highScore.record.map((item) => {
