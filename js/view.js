@@ -1,14 +1,30 @@
 import {model} from './model.js';
 // import {controller} from './controller.js';
 
+import screenStart from './screens/screenStart.js';
+import screenGame from './screens/screenGame.js';
+import screenScore from './screens/screenScore.js';
+
+const screens = {
+  screenStart,
+  screenGame,
+  screenScore
+};
+
+let board = document.querySelector(`#board`);
 let screenTable = document.querySelector(`.screen`);
 let nextFigureScreen = document.querySelector(`.nextFigure__table`);
 let linesSpan = document.querySelector(`.info__score`);
 let speedSpan = document.querySelector(`.info__speed`);
-// let nextFigureBlock = document.querySelector(`.info__nextFigure`);
 
 
 let view = {
+  init() {
+//    this.renderScreen(`screenStart`);
+//    this.showOverlay(`start`);
+    this.overlay = document.querySelector(`.overlay__start`);
+  },
+
   displayMessage(msg) {
     let area = document.getElementById(`messageArea`);
     area.innerHTML = msg;
@@ -22,8 +38,10 @@ let view = {
 //    console.log(location);
     // берем либо экран игры либо экран следующей фигуры
     if (!area) {
+//      area = screenGame.screenTable;
       area = screenTable;
     } else {
+//      area = screenGame.nextFigureScreen;
       area = nextFigureScreen;
     }
 
@@ -100,9 +118,42 @@ let view = {
     linesSpan.innerHTML = model.score;
     speedSpan.innerHTML = model.speed;
 //    nextFigureBlock.innerHTML = model.nextFigure;
+  },
+
+  getElementFromTemplate(template) {
+    let container = document.createElement(`template`);
+    container.innerHTML = template;
+    return container.content;
+  },
+
+  renderScreen(name, parent) {
+    let elem = screens[name].getElem();
+    parent.innerHTML = ``;
+    parent.appendChild(elem);
+  },
+
+  // принимаем имя оверлея на вход и ищём его по классу
+  // name => querySelector(`.overlay++` + name);
+  showOverlay(name) {
+
+    // меняем классы у существуюущих в разметке элементов с классом .overlay
+    // например - .overlay .overlay__start .hidden
+    // удаляем .hidden - этот экран становится виден
+    if (this.overlay) {
+      this.hideOverlay();
+    }
+
+    this.overlay = document.querySelector(`.overlay__` + name);
+    this.overlay.classList.remove(`hidden`);
+
+//    board.innerHTML = ``;
+//    board.appendChild(elem);
+//    console.log(screens);
+  },
+
+  hideOverlay() {
+    this.overlay.classList.add(`hidden`);
   }
-
-
 };
 
 export {view};

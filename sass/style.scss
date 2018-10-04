@@ -2,9 +2,9 @@ $color_body: #53c5ff;
 $color_screen: #e8f2b3;
 $color_pixel: black;
 $pixel_size: 20px;
-$pixel_borderWidth: $pixel_size * (2/13);
-$pixel_margin: $pixel_size * (2/13);
-$pixel_inner_margin: $pixel_size * (2/13);
+$pixel_borderWidth: 3px;
+$pixel_margin: 3px;
+$pixel_inner_margin: 3px;
 $pixel_opacity: 0.1;
 
 $nextFigureTableSize: ($pixel_size + $pixel_borderWidth*2 + $pixel_margin)+$pixel_margin;
@@ -12,11 +12,54 @@ $nextFigureTableSize: ($pixel_size + $pixel_borderWidth*2 + $pixel_margin)+$pixe
 
 
 body {
-  background-color: $color_body;
+  background-color: white;
   text-align: center;
+	padding: 0;
+	margin: 0;
+//	font-weight: bold;
+	font-size: 24px;
+  overflow-x: hidden;
+}
+
+.tetris {
+	display: inline-block;
+	vertical-align: top;
+	padding: 300px;
+	padding-top: 240px;
+	background-color: $color_body;
+	background-image:
+    repeating-linear-gradient(-45deg, rgba(255,255,255, 0.25), rgba(255,255,255, 0.25) 1px, transparent 1px, transparent 6px),
+    url('../img/svg1.svg'),
+    url('../img/svg2.svg'),
+    linear-gradient(45deg, #0477c5, $color_body),
+    ;
+  background-size: 4px 4px, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-position: 0%, 11% 47%, 210% 47%, 0%;
+	box-sizing: border-box;
+	border: 3px solid black;
+	border-top-left-radius: 8%;
+	border-top-right-radius: 8%;
+	position: relative;
+
+//  transform: scale(0.5);
+  transform-origin: 50% 0;
+}
+
+.tetris:before {
+  position: absolute;
+  content: '';
+  border: 10px solid white;
+  border-top-color: transparent;
+  top: 154px;
+  left: 207px;
+  right: 207px;
+  bottom: 229px;
+  z-index: 2;
 }
 
 #board {
+  min-width: 451px;
   display: inline-block;
   vertical-align: top;
   position: relative;
@@ -25,20 +68,70 @@ body {
 /*			outline: 1px solid red;*/
 //  margin: auto;
 /*			background: url(../img/board.jpg) no-repeat;*/
+//  background: url(../img/tetris_background.gif) no-repeat;
+//  background-size: 100% auto;
+  background: $color_screen;
+  box-shadow: inset 10px 10px 3px rgba(black, 0.5);
+  padding: 10px;
+	outline: inset 60px #53c5ff;
+}
+
+#board:before {
+  position: absolute;
+//  content: '';
+  border: 10px solid white;
+  border-top-color: transparent;
+  top: -87px;
+  left: -93px;
+  right: -93px;
+  bottom: -72px;
+  z-index: 0;
+}
+
+.tetris__title {
+    position: absolute;
+    color: white;
+    top: 94px;
+    left: 0px;
+    right: 0px;
+    z-index: 2;
+    /* overflow: hidden; */
+    white-space: nowrap;
+    text-align: center;
+}
+
+.tetris__title:before,
+.tetris__title:after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    width: 22.45%;
+    height: 10px;
+    vertical-align: middle;
+    background: white;
+    background-clip: content-box;
+}
+
+.board__title:after {
+  left: .5em;
+  margin: 0 -50% 0 0;
+}
+
+.board__title:before {
+  left: -.5em;
+  margin: 0 0 0 -50%;
 }
 
 .screen {
-  background: $color_screen;
   margin: auto;
   display: inline-block;
   vertical-align: top;
 //  position: absolute;
 /*			outline: 1px solid red;*/
-  left: 173px;
-  top: 99px;
   border-spacing: $pixel_margin;
+  border: 4px solid black;
+  border-left: none;
 }
-
 
 #info__table {
 //  outline: 1px solid yellow;
@@ -57,7 +150,8 @@ body {
   align-items: center;
 }
 
-td {
+.screen td,
+.info td {
 /*  border: 1px solid lime;*/
   width: $pixel_size;
   height: $pixel_size;
@@ -65,7 +159,8 @@ td {
   position: relative;
 }
 
-td:before {
+.screen td:before,
+.info td:before {
   content: '';
   position: absolute;
   top: $pixel_inner_margin;
@@ -82,7 +177,7 @@ td:before {
   background-color: rgba($color_pixel, $pixel_opacity);
 }
 
-#messageArea {
+.info {
 //  position: absolute;
   top: 0;
   left: 0;
@@ -90,8 +185,9 @@ td:before {
   color: rgb(0, 0, 0);
   display: inline-block;
   vertical-align: top;
-  padding: 10px 20px;
+//  padding: 10px 20px;
   text-align: left;
+//  outline: 1px solid lime;
 }
 
 
@@ -116,4 +212,42 @@ input {
 
 .hit:before {
   background-color: rgba($color_pixel, 1);
+}
+
+.score {
+  text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.score__title {
+  font-size: 36px;
+}
+
+.score__table {
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+	border-collapse: collapse;
+}
+
+.score td {
+//  outline: 1px solid black;
+	border: 3px solid black;
+  padding: 5px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: $color_screen;
+	box-shadow: inherit;
+//	outline: inherit;
+}
+
+.hidden {
+  display: none;
 }

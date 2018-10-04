@@ -1,13 +1,14 @@
 import {model} from './model.js';
-import {controller} from './controller.js';
 import {Table} from './table.js';
+import {view} from './view.js';
+import {controller} from './controller.js';
 
 
 class Application {
 
   constructor() {
     model.init();
-    controller.init();
+
     this.table = new Table(model.rows, model.cells);
 
     this.render();
@@ -18,12 +19,8 @@ class Application {
     let screen = document.querySelector(`.screen`);
     screen.appendChild(table);
 
-    model.generateFigure();
-//    document.body.append(this.userList.getElem());
-//
-//    this.load();
-//
-//    this.userList.getElem().addEventListener('user-select', this.onUserSelect.bind(this))
+    view.init();
+    controller.init();
   }
 }
 

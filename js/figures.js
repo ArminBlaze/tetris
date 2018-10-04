@@ -43,6 +43,8 @@ class Figure {
 
     let table = this.table.getElem();
     let nextFigureScreen = document.querySelector(`.nextFigure__table`);
+    if(!nextFigureScreen) return;
+
     nextFigureScreen.innerHTML = ``;
     nextFigureScreen.appendChild(table);
 
