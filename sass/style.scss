@@ -28,11 +28,14 @@ body {
 	padding-top: 240px;
 	background-color: $color_body;
 	background-image:
+    repeating-linear-gradient(-45deg, rgba(255,255,255, 0.25), rgba(255,255,255, 0.25) 1px, transparent 1px, transparent 6px),
     url('../img/svg1.svg'),
     url('../img/svg2.svg'),
-    linear-gradient(45deg, #0477c5, $color_body);
-  background-repeat: no-repeat;
-  background-position: 11% 47%, 210% 47%;;
+    linear-gradient(45deg, #0477c5, $color_body),
+    ;
+  background-size: 4px 4px, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-position: 0%, 11% 47%, 210% 47%, 0%;
 //  background-image: url('../img/svg1.svg');
 
 
@@ -44,18 +47,6 @@ body {
 
 //  transform: scale(0.5);
   transform-origin: 50% 0;
-}
-
-.tetris:before {
-  border-radius: inherit;
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-image: repeating-linear-gradient(-45deg, rgba(255,255,255, 0.25), rgba(255,255,255, 0.25) 1px, transparent 1px, transparent 6px);
-    background-size: 4px 4px;
 }
 
 #board {
@@ -70,7 +61,6 @@ body {
 /*			background: url(../img/board.jpg) no-repeat;*/
 //  background: url(../img/tetris_background.gif) no-repeat;
 //  background-size: 100% auto;
-  outline: 1px solid black;
   background: $color_screen;
   box-shadow: inset 10px 10px 3px rgba(black, 0.5);
   padding: 10px;
@@ -247,7 +237,7 @@ input {
   right: 0;
   background: $color_screen;
 	box-shadow: inherit;
-	outline: inherit;
+//	outline: inherit;
 }
 
 .hidden {
