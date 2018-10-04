@@ -36,9 +36,6 @@ body {
   background-size: 4px 4px, auto, auto, auto;
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
   background-position: 0%, 11% 47%, 210% 47%, 0%;
-//  background-image: url('../img/svg1.svg');
-
-
 	box-sizing: border-box;
 	border: 3px solid black;
 	border-top-left-radius: 8%;
@@ -47,6 +44,18 @@ body {
 
 //  transform: scale(0.5);
   transform-origin: 50% 0;
+}
+
+.tetris:before {
+  position: absolute;
+  content: '';
+  border: 10px solid white;
+  border-top-color: transparent;
+  top: 154px;
+  left: 207px;
+  right: 207px;
+  bottom: 229px;
+  z-index: 2;
 }
 
 #board {
@@ -69,7 +78,7 @@ body {
 
 #board:before {
   position: absolute;
-  content: '';
+//  content: '';
   border: 10px solid white;
   border-top-color: transparent;
   top: -87px;
@@ -79,10 +88,10 @@ body {
   z-index: 0;
 }
 
-.board__title {
+.tetris__title {
     position: absolute;
     color: white;
-    top: -147px;
+    top: 94px;
     left: 0px;
     right: 0px;
     z-index: 2;
@@ -91,17 +100,16 @@ body {
     text-align: center;
 }
 
-.board__title:before,
-.board__title:after {
-     content: "";
+.tetris__title:before,
+.tetris__title:after {
+    content: "";
     position: relative;
     display: inline-block;
-    width: 45.95%;
+    width: 22.45%;
     height: 10px;
     vertical-align: middle;
     background: white;
     background-clip: content-box;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .board__title:after {
