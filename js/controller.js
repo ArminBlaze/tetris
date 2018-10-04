@@ -8,28 +8,6 @@ const KEYCODES = {
   ESC: 27
 };
 
-const Key = {
-  _pressed: {},
-
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  ESC: 27,
-
-  isDown(keyCode) {
-    return this._pressed[keyCode];
-  },
-
-  onKeydown(event) {
-    this._pressed[event.keyCode] = true;
-  },
-
-  onKeyup(event) {
-    delete this._pressed[event.keyCode];
-  }
-};
-
 let controller = {
   guesses: 0,
 
@@ -41,60 +19,11 @@ let controller = {
   },
 
   activate() {
-//    window.addEventListener(`keydown`, this.keyHandle);
-
-    window.addEventListener(`keyup`, this.keyUpHandle, false);
-    window.addEventListener(`keydown`, this.keyDownHandle, false);
-    this.activateKeyRefresher();
+    window.addEventListener(`keydown`, this.keyHandle);
   },
 
   deactivate() {
-//    window.removeEventListener(`keydown`, this.keyHandle);
-
-    window.removeEventListener(`keyup`, this.keyUpHandle);
-    window.removeEventListener(`keydown`, this.keyDownHandle);
-    this.deactivateKeyRefresher();
-  },
-
-  keyUpHandle(e) {
-    console.log(`Отжата кнопка ` + e.keyCode);
-    Key.onKeyup(e);
-  },
-
-  keyDownHandle(e) {
-    console.log(`Нажата кнопка ` + e.keyCode);
-    Key.onKeydown(e);
-  },
-
-  activateKeyRefresher() {
-    this.keyTimer = setInterval(this.keyUpdate, 100);
-  },
-
-  deactivateKeyRefresher() {
-    clearInterval(this.keyTimer);
-  },
-
-  keyUpdate() {
-    if (Key.isDown(Key.UP)) {
-      model.figure.rotate();
-//      this.moveUp();
-    }
-    if (Key.isDown(Key.LEFT)) {
-      model.figure.move(`left`);
-//      this.moveLeft();
-    }
-    if (Key.isDown(Key.DOWN)) {
-      model.figure.move(`down`);
-//      this.moveDown();
-    }
-    if (Key.isDown(Key.RIGHT)) {
-      model.figure.move(`right`);
-//      this.moveRight();
-    }
-    if (Key.isDown(Key.ESC)) {
-      model.figure.pause();
-//      debugger;
-    }
+    window.removeEventListener(`keydown`, this.keyHandle);
   },
 
   keyHandle(e) {
@@ -102,29 +31,34 @@ let controller = {
 
     let keycode = e.keyCode;
 //    console.log(keycode);
+    let key = ``;
 
     switch (keycode) {
-      case Key.LEFT:
+      case KEYCODES.LEFT:
         e.preventDefault();
-        model.figure.move(`left`);
+        key = `left`;
         break;
-      case Key.UP:
+      case KEYCODES.UP:
         e.preventDefault();
         model.figure.rotate();
+        return;
         break;
-      case Key.RIGHT:
+      case KEYCODES.RIGHT:
         e.preventDefault();
-        model.figure.move(`right`);
+        key = `right`;
         break;
-      case Key.DOWN:
+      case KEYCODES.DOWN:
         e.preventDefault();
-        model.figure.move(`down`);
+        key = `down`;
         break;
-      case Key.ESC:
+      case KEYCODES.ESC:
         e.preventDefault();
         model.figure.pause();
+        return;
         break;
     }
+
+    model.figure.move(key);
   },
 
   // тут нужно тестировать на выход за пределы поля и пересечение с "кучей"

@@ -124,7 +124,7 @@ class Figure {
     if (model.paused) {
       clearInterval(this.timer);
       // Добавить надпись ПАУЗА
-      console.log(`Пауза`);
+      alert(`Пауза`);
     } else {
       this.startTimer();
     }
