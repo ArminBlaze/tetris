@@ -64,6 +64,20 @@ let controller = {
   keyDownHandle(e) {
     console.log(`Нажата кнопка ` + e.keyCode);
     Key.onKeydown(e);
+
+    // отменяем событие
+    let keycode = e.keyCode;
+//    console.log(keycode);
+
+    switch (keycode) {
+      case Key.LEFT:
+      case Key.UP:
+      case Key.RIGHT:
+      case Key.DOWN:
+      case Key.ESC:
+        e.preventDefault();
+        break;
+    }
   },
 
   activateKeyRefresher() {
