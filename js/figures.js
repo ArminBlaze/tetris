@@ -55,7 +55,7 @@ class Figure {
   }
 
   calculateFigureSize() {
-    console.log(`displayNextFigure`, this.coords);
+//    console.log(`displayNextFigure`, this.coords);
     // вычислить ширину и высоту фигуры
     let minCell = 0;
     let maxCell = 0;
@@ -82,7 +82,7 @@ class Figure {
     let width = (maxCell - minCell) + 1;
     let height = (maxRow - minRow) + 1;
 
-    console.log(`Width: ` + width, `Height: ` + height);
+//    console.log(`Width: ` + width, `Height: ` + height);
     this.cells = width;
     this.rows = height;
   }
@@ -139,7 +139,7 @@ class Figure {
     // 100 магическое число - шаг ускорения таймера, при повышении уровня скорости
     // каждые 10 линий фигура ускоряется на 100мс
     let timerTick = 1000 - model.speed * 100;
-    console.log(timerTick);
+//    console.log(timerTick);
     return timerTick;
   }
 
@@ -180,8 +180,8 @@ class Figure {
   }
 
   fusionWithMasonry(coords) {
-    console.log(`Слияние с кучей`);
-    console.log(model.lines);
+//    console.log(`Слияние с кучей`);
+//    console.log(model.lines);
 
     model.linesToDelete = [];
     // выполнить слияние с кучей
@@ -232,7 +232,7 @@ class Figure {
   calculateRealCoords(startPos) {
     let startCoords = model.splitCoords(startPos);
 
-    console.log(startCoords);
+//    console.log(startCoords);
 
     let absoluteCoords = [];
     this.coords.forEach((item) => {
@@ -293,7 +293,7 @@ class Figure {
 
   destroy() {
     // убирает таймер и удаляет фигуру\
-    console.log(`удаляем фигуру`, this);
+//    console.log(`удаляем фигуру`, this);
     clearInterval(this.timer);
   }
 }

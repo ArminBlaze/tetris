@@ -66,10 +66,10 @@ let model = {
     this.handleHighScore();
 
     // переключаем экран и там уже выводим таблицу
-    //создаём оверлей
+    // создаём оверлей
     view.showOverlay(`score`);
 
-    //пишем в оверлей таблицу
+    // пишем в оверлей таблицу
     view.renderScreen(`screenScore`, document.querySelector(`.overlay__score`));
 
     // выводим таблицу highScores
@@ -118,7 +118,7 @@ let model = {
     let score = this.score;
     let prevScores = this.getHighScoresArray();
     this.record = prevScores;
-    console.log(prevScores);
+//    console.log(prevScores);
 
 
     // если массив пуст - создать новый массив и записать текущее значение и имя пользователя
@@ -188,7 +188,7 @@ let model = {
 
   getHighScoresArray() {
     let cookie = utils.getCookie(this.HIGH_SCORES_NAME);
-    console.log(cookie);
+//    console.log(cookie);
     if (cookie) {
       return JSON.parse(cookie);
     } else {
@@ -231,8 +231,10 @@ let model = {
       this.figure.destroy();
     }
 
-    //если игра закончилась, ничего не создавать
-    if(!this.gameInProgress) return;
+    // если игра закончилась, ничего не создавать
+    if (!this.gameInProgress) {
+      return;
+    }
 //    debugger;
 
     if (this.nextFigure) {
@@ -243,8 +245,8 @@ let model = {
 
     this.nextFigure = this.pickRandomFigure();
 
-    console.log(`Эта фигура: `, this.figure);
-    console.log(`След фигура: `, this.nextFigure);
+//    console.log(`Эта фигура: `, this.figure);
+//    console.log(`След фигура: `, this.nextFigure);
 
 //    let coords = this.figure.coords;
 //    console.log(coords);
@@ -257,7 +259,7 @@ let model = {
     this.figure.drawFigure();
 
     // отрисовать следующую фигуру в окне след фигуры
-    console.log(this.nextFigure);
+//    console.log(this.nextFigure);
     this.nextFigure.drawNextFigure();
 
     // запускает таймер движения фигуры
@@ -279,7 +281,7 @@ let model = {
 //      this.deleteLine(row);
 
       this.linesToDelete.push(row);
-      console.log(this.lines);
+//      console.log(this.lines);
     }
   },
 

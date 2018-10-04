@@ -81,7 +81,7 @@ let view = {
   },
 
   refresh() {
-    console.log(`view.refresh`);
+//    console.log(`view.refresh`);
     for (let i = 0; i < model.currentState.lines.length; i++) {
       for (let j = 0; j < model.currentState.lines[i].length; j++) {
         if (model.currentState.lines[i][j]) {
