@@ -55,13 +55,8 @@ let controller = {
     window.removeEventListener(`keydown`, this.keyDownHandle);
     this.deactivateKeyRefresher();
   },
-
-  keyUpHandle(e) {
-    console.log(`Отжата кнопка ` + e.keyCode);
-    Key.onKeyup(e);
-  },
-
-  keyDownHandle(e) {
+	
+	 keyDownHandle(e) {
     console.log(`Нажата кнопка ` + e.keyCode);
     Key.onKeydown(e);
 
@@ -78,6 +73,11 @@ let controller = {
         e.preventDefault();
         break;
     }
+  },
+
+  keyUpHandle(e) {
+    console.log(`Отжата кнопка ` + e.keyCode);
+    Key.onKeyup(e);
   },
 
   activateKeyRefresher() {
