@@ -1,5 +1,54 @@
 import {model} from './model.js';
 
+//переместить ее в controller, чтобы self = controller
+function throttleWithFirstDelay (f, key, ms, firstDelay) {
+	var timer;
+	var args;
+	var called = false;
+
+	return function() {	
+//				debugger;
+		console.log('debounce');
+		var self = this;
+		args = [].slice.call(arguments);
+
+		if(timer) {
+			console.log('найден таймер');
+			called = true;
+			return;
+		}
+		
+		console.log('первичный запуск функции');
+		f.apply(self, args);
+
+		//рекурсивный вызов timeout вместо interval
+		timer = setTimeout(function runTimer() {
+//					debugger;
+			console.log('запуск ф-ции в таймере');
+			if(!called) {
+				timer = null;
+				console.log('не было вызова, сбрасываю таймер');
+			}
+
+			if (timer && called) {
+				console.log('есть таймер и кнопка нажата');
+				if(Key.isDown(key)) {
+					f.apply(self, args);
+				}
+				timer = setTimeout(runTimer, ms, args);
+			}
+
+			called = false;
+			console.log('called = false');
+		}, firstDelay, args);
+	};
+}
+
+function decorRotate() {
+	model.figure.rotate();
+}
+
+
 const KEYCODES = {
   LEFT: 37,
   UP: 38,
@@ -29,6 +78,9 @@ const Key = {
     delete this._pressed[event.keyCode];
   }
 };
+
+
+let debouncedRotateWithFirstDelay = throttleWithFirstDelay(decorRotate, Key.UP, 500, 500);
 
 let controller = {
   guesses: 0,
@@ -62,7 +114,6 @@ let controller = {
 
     // отменяем событие
     let keycode = e.keyCode;
-//    console.log(keycode);
 
     switch (keycode) {
       case Key.LEFT:
@@ -89,10 +140,10 @@ let controller = {
   },
 
   keyUpdate() {
-    if (Key.isDown(Key.UP)) {
-      model.figure.rotate();
-//      this.moveUp();
+		if (Key.isDown(Key.UP)) {
+    	debouncedRotateWithFirstDelay();
     }
+		
     if (Key.isDown(Key.LEFT)) {
       model.figure.move(`left`);
 //      this.moveLeft();

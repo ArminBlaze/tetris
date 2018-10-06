@@ -25,4 +25,3 @@ class Application {
 }
 
 let app = new Application();
-
