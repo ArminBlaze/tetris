@@ -237,3 +237,57 @@ input {
 .hidden {
   display: none;
 }
+
+
+////////////////////// Цветовые схемы
+
+
+.tetris_color1 .hit {
+  border-radius: 3px;
+  border: none;
+  padding: 3px;
+  box-shadow: inset 0px -1px 2px #01fff9;
+//  background-image: linear-gradient(#0245ad, #01dafb);
+  background-image: radial-gradient(circle at bottom, rgba(16, 236, 236, 1) 20%, rgba(0, 44, 228, 1) 80%);
+}
+
+.tetris_color1 .hit:before {
+  background: transparent;
+  content: ".";
+  color:transparent;
+//    line-height: 16px;
+  width: 90%;
+  margin: 0 auto;
+//  margin-top: 0px;
+  margin-bottom: 14px;
+//  margin-left: 5px;
+//  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.2) );
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) );
+  border-radius: 3px;
+//    display:block;
+}
+
+///Color2
+.tetris_color2 .hit {
+  border-radius: 3px;
+  border: none;
+  padding: 3px;
+  box-shadow: inset 0px -1px 2px #01fff9;
+  background-image: linear-gradient(#0245ad, #01dafb);
+}
+
+.tetris_color2 .hit:before {
+  background: transparent;
+  content: ".";
+  color:transparent;
+//    line-height: 16px;
+  width: 90%;
+  margin: 0 auto;
+//  margin-top: 0px;
+  margin-bottom: 14px;
+//  margin-left: 5px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.2) );
+  border-radius: 3px;
+//    display:block;
+}
+
