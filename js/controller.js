@@ -123,8 +123,11 @@ let controller = {
       case Key.UP:
       case Key.RIGHT:
       case Key.DOWN:
+        e.preventDefault();
+        break;
       case Key.ESC:
         e.preventDefault();
+        model.figure.pause();
         break;
     }
   },
@@ -156,7 +159,7 @@ let controller = {
       debouncedMoveRight(`right`);
     }
     if (Key.isDown(Key.ESC)) {
-      model.figure.pause();
+//      model.figure.pause();
     }
   },
 
