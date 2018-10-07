@@ -1,51 +1,8 @@
 import {model} from './model.js';
 
-//переместить ее в controller, чтобы self = controller
-function throttleWithFirstDelay (f, key, ms, firstDelay) {
-	var timer;
-	var args;
-	var called = false;
-
-	return function() {	
-//				debugger;
-		console.log('debounce');
-		var self = this;
-		args = [].slice.call(arguments);
-
-		if(timer) {
-			console.log('найден таймер');
-			called = true;
-			return;
-		}
-		
-		console.log('первичный запуск функции');
-		f.apply(self, args);
-
-		//рекурсивный вызов timeout вместо interval
-		timer = setTimeout(function runTimer() {
-//					debugger;
-			console.log('запуск ф-ции в таймере');
-			if(!called) {
-				timer = null;
-				console.log('не было вызова, сбрасываю таймер');
-			}
-
-			if (timer && called) {
-				console.log('есть таймер и кнопка нажата');
-				if(Key.isDown(key)) {
-					f.apply(self, args);
-				}
-				timer = setTimeout(runTimer, ms, args);
-			}
-
-			called = false;
-			console.log('called = false');
-		}, firstDelay, args);
-	};
-}
 
 function decorRotate() {
-	model.figure.rotate();
+  model.figure.rotate();
 }
 
 
@@ -59,6 +16,7 @@ const KEYCODES = {
 
 const Key = {
   _pressed: {},
+  _timers: {},
 
   LEFT: 37,
   UP: 38,
@@ -72,15 +30,63 @@ const Key = {
 
   onKeydown(event) {
     this._pressed[event.keyCode] = true;
+//    this._timers[event.keyCode] = true;
   },
 
   onKeyup(event) {
     delete this._pressed[event.keyCode];
+    clearTimeout(this._timers[event.keyCode]);
+    delete this._timers[event.keyCode];
   }
 };
 
 
 let debouncedRotateWithFirstDelay = throttleWithFirstDelay(decorRotate, Key.UP, 500, 500);
+
+// переместить ее в controller, чтобы self = controller
+function throttleWithFirstDelay(f, key, ms, firstDelay) {
+//  let timer;
+//  Key._timers[event.keyCode] = true;
+  let args;
+  let called = false;
+
+  return function () {
+//				debugger;
+    console.log(`debounce`);
+    let self = this;
+    args = [].slice.call(arguments);
+
+    if (Key._timers[key]) {
+      console.log(`найден таймер`);
+      called = true;
+      return;
+    }
+
+    console.log(`первичный запуск функции`);
+    f.apply(self, args);
+
+		// рекурсивный вызов timeout вместо interval
+    Key._timers[key] = setTimeout(function runTimer() {
+//					debugger;
+      console.log(`запуск ф-ции в таймере`);
+      if (!called) {
+        Key._timers[key] = null;
+        console.log(`не было вызова, сбрасываю таймер`);
+      }
+
+      if (Key._timers[key] && called) {
+        console.log(`есть таймер и кнопка нажата`);
+        if (Key.isDown(key)) {
+          f.apply(self, args);
+        }
+        Key._timers[key] = setTimeout(runTimer, ms, args);
+      }
+
+      called = false;
+      console.log(`called = false`);
+    }, firstDelay, args);
+  };
+};
 
 let controller = {
   guesses: 0,
@@ -107,24 +113,24 @@ let controller = {
     window.removeEventListener(`keydown`, this.keyDownHandle);
     this.deactivateKeyRefresher();
   },
-	
+
 	 keyDownHandle(e) {
-    console.log(`Нажата кнопка ` + e.keyCode);
-    Key.onKeydown(e);
+   console.log(`Нажата кнопка ` + e.keyCode);
+   Key.onKeydown(e);
 
     // отменяем событие
-    let keycode = e.keyCode;
+   let keycode = e.keyCode;
 
-    switch (keycode) {
-      case Key.LEFT:
-      case Key.UP:
-      case Key.RIGHT:
-      case Key.DOWN:
-      case Key.ESC:
-        e.preventDefault();
-        break;
-    }
-  },
+   switch (keycode) {
+     case Key.LEFT:
+     case Key.UP:
+     case Key.RIGHT:
+     case Key.DOWN:
+     case Key.ESC:
+       e.preventDefault();
+       break;
+   }
+ },
 
   keyUpHandle(e) {
     console.log(`Отжата кнопка ` + e.keyCode);
@@ -140,10 +146,10 @@ let controller = {
   },
 
   keyUpdate() {
-		if (Key.isDown(Key.UP)) {
+    if (Key.isDown(Key.UP)) {
     	debouncedRotateWithFirstDelay();
     }
-		
+
     if (Key.isDown(Key.LEFT)) {
       model.figure.move(`left`);
 //      this.moveLeft();
