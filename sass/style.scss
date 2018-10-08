@@ -10,7 +10,6 @@ $pixel_opacity: 0.1;
 $nextFigureTableSize: ($pixel_size + $pixel_borderWidth*2 + $pixel_margin)+$pixel_margin;
 
 
-
 body {
   background-color: white;
   text-align: center;
@@ -22,6 +21,7 @@ body {
 }
 
 .tetris {
+  margin-top: -100px;
 	display: inline-block;
 	vertical-align: top;
 	padding: 300px;
@@ -176,7 +176,6 @@ body {
 //  outline: 1px solid lime;
 }
 
-
 form {
   position: absolute;
   bottom: 0;
@@ -232,6 +231,29 @@ input {
   background: $color_screen;
 	box-shadow: inherit;
 //	outline: inherit;
+}
+
+.overlay__start {
+  display: flex;
+  margin: auto;
+}
+
+.startBlock {
+  margin: auto;
+}
+
+.main-play {
+  background: #fde32a;
+  padding: 10px;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  border: none;
+//  border: 2px solid black;
+  box-shadow: 0px 0px 0px 1px rgba(black, 1),
+              5px 5px 5px 0px rgba(black, 0.5);
+  box-shadow: inset 1px 1px 10px 1px rgb(255, 236, 100), 0 1px 0 rgba(78, 72, 29, 0.3), 0 6px 0 rgba(82, 76, 30, 0.3), 0 8px 4px 1px rgba(17, 17, 17, 0.3);
+  outline: none;
 }
 
 .hidden {

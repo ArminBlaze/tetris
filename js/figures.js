@@ -31,19 +31,22 @@ class Figure {
   }
 
   drawNextFigure() {
-    // нужно рефрешить окошно след фигуры
+    // нужно рефрешить оконо след фигуры
     view.refreshNextFigure();
 
     // вызвать calculateFigureSize и получить размер фигуры
     this.calculateFigureSize();
 
+    // генерируем мини-таблицу для следующей фигуры
     // вызвать функцию генерации таблицы (поля) с указанным размером
     // она должна получить размер и вернуть элемент
     this.table = new Table(this.rows, this.cells);
 
     let table = this.table.getElem();
     let nextFigureScreen = document.querySelector(`.nextFigure__table`);
-    if(!nextFigureScreen) return;
+    if (!nextFigureScreen) {
+      return;
+    }
 
     nextFigureScreen.innerHTML = ``;
     nextFigureScreen.appendChild(table);
