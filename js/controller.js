@@ -1,15 +1,21 @@
 import {model} from './model.js';
 
-const KEYCODES = {
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  ESC: 27
-};
+const gameTickSpeed = 50;
+const moveDelay = 200;
+const rotateTick = 500;
+const rotateDelay = 500;
+
+function decorRotate() {
+  model.figure.rotate();
+}
+
+function decorMove(direction) {
+  model.figure.move(direction);
+}
 
 const Key = {
-  _pressed: {},
+//  _pressed: {},
+//  _timers: {},
 
   LEFT: 37,
   UP: 38,
@@ -17,22 +23,71 @@ const Key = {
   DOWN: 40,
   ESC: 27,
 
+  init() {
+    this._pressed = {};
+    this._timers = {};
+  },
+
   isDown(keyCode) {
     return this._pressed[keyCode];
   },
 
   onKeydown(event) {
     this._pressed[event.keyCode] = true;
+//    this._timers[event.keyCode] = true;
   },
 
   onKeyup(event) {
     delete this._pressed[event.keyCode];
+    clearTimeout(this._timers[event.keyCode]);
+    delete this._timers[event.keyCode];
   }
 };
 
-let controller = {
-  guesses: 0,
 
+let debouncedRotateWithFirstDelay = throttleWithFirstDelay(decorRotate, Key.UP, rotateTick, rotateDelay);
+let debouncedMoveLeft = throttleWithFirstDelay(decorMove, Key.LEFT, gameTickSpeed, moveDelay);
+let debouncedMoveRight = throttleWithFirstDelay(decorMove, Key.RIGHT, gameTickSpeed, moveDelay);
+
+// переместить ее в controller, чтобы self = controller
+function throttleWithFirstDelay(f, key, ms, firstDelay) {
+//  let timer;
+//  Key._timers[event.keyCode] = true;
+  let args;
+  let called = false;
+
+  return function () {
+//				debugger;
+    let self = this;
+    args = [].slice.call(arguments);
+
+    if (Key._timers[key]) {
+      called = true;
+      return;
+    }
+
+    f.apply(self, args);
+
+		// рекурсивный вызов timeout вместо interval
+    Key._timers[key] = setTimeout(function runTimer() {
+//					debugger;
+      if (!called) {
+        Key._timers[key] = null;
+      }
+
+      if (Key._timers[key] && called) {
+        if (Key.isDown(key)) {
+          f.apply(self, args);
+        }
+        Key._timers[key] = setTimeout(runTimer, ms, args);
+      }
+
+      called = false;
+    }, firstDelay, args);
+  };
+}
+
+let controller = {
   init() {
     let startButton = document.querySelector(`.main-play`);
     startButton.onclick = function () {
@@ -46,6 +101,7 @@ let controller = {
     window.addEventListener(`keyup`, this.keyUpHandle, false);
     window.addEventListener(`keydown`, this.keyDownHandle, false);
     this.activateKeyRefresher();
+    Key.init();
   },
 
   deactivate() {
@@ -56,18 +112,32 @@ let controller = {
     this.deactivateKeyRefresher();
   },
 
+  keyDownHandle(e) {
+    Key.onKeydown(e);
+
+    // отменяем событие
+    let keycode = e.keyCode;
+
+    switch (keycode) {
+      case Key.LEFT:
+      case Key.UP:
+      case Key.RIGHT:
+      case Key.DOWN:
+        e.preventDefault();
+        break;
+      case Key.ESC:
+        e.preventDefault();
+        model.figure.pause();
+        break;
+    }
+  },
+
   keyUpHandle(e) {
-    console.log(`Отжата кнопка ` + e.keyCode);
     Key.onKeyup(e);
   },
 
-  keyDownHandle(e) {
-    console.log(`Нажата кнопка ` + e.keyCode);
-    Key.onKeydown(e);
-  },
-
   activateKeyRefresher() {
-    this.keyTimer = setInterval(this.keyUpdate, 100);
+    this.keyTimer = setInterval(this.keyUpdate, gameTickSpeed);
   },
 
   deactivateKeyRefresher() {
@@ -76,54 +146,20 @@ let controller = {
 
   keyUpdate() {
     if (Key.isDown(Key.UP)) {
-      model.figure.rotate();
-//      this.moveUp();
+      debouncedRotateWithFirstDelay();
     }
+
     if (Key.isDown(Key.LEFT)) {
-      model.figure.move(`left`);
-//      this.moveLeft();
+      debouncedMoveLeft(`left`);
     }
     if (Key.isDown(Key.DOWN)) {
       model.figure.move(`down`);
-//      this.moveDown();
     }
     if (Key.isDown(Key.RIGHT)) {
-      model.figure.move(`right`);
-//      this.moveRight();
+      debouncedMoveRight(`right`);
     }
     if (Key.isDown(Key.ESC)) {
-      model.figure.pause();
-//      debugger;
-    }
-  },
-
-  keyHandle(e) {
-    console.log(e.repeat);
-
-    let keycode = e.keyCode;
-//    console.log(keycode);
-
-    switch (keycode) {
-      case Key.LEFT:
-        e.preventDefault();
-        model.figure.move(`left`);
-        break;
-      case Key.UP:
-        e.preventDefault();
-        model.figure.rotate();
-        break;
-      case Key.RIGHT:
-        e.preventDefault();
-        model.figure.move(`right`);
-        break;
-      case Key.DOWN:
-        e.preventDefault();
-        model.figure.move(`down`);
-        break;
-      case Key.ESC:
-        e.preventDefault();
-        model.figure.pause();
-        break;
+//      model.figure.pause();
     }
   },
 
@@ -134,16 +170,6 @@ let controller = {
     return coords.every((item) => {
       return this.testPixel(item);
     });
-
-
-//    if (!isFinite(row) || !isFinite(column)) {
-//        alert(`Oops, that isn't on the board.`);
-//      } else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
-//        alert(`Oops, that's off the board!`);
-//      } else {
-//        return row + column;
-//      }
-
   },
 
   testPixel(coords) {
@@ -169,23 +195,6 @@ let controller = {
     }
 
     return true;
-  },
-
-  processGuess(guess) {
-    debugger;
-    let location = this.parseGuess(guess);
-    if (location) {
-      var hitLog = this.isHit(location);
-    }
-    if (location && hitLog) {
-      console.log(`You already fired in this cell!`);
-//			debugger;
-    } else if (location) {
-      this.guesses++;
-//			this.hitLog.push(location);
-
-      let hit = model.fire(location);
-    }
   },
 
   isHit(location) {

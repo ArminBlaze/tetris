@@ -12,6 +12,55 @@ function nextIndexInArray(index, arr) {
   }
 }
 
+function debounce (f, ms) {
+  var timer;
+
+  return function() {
+    if(timer) clearTimeout(timer);
+
+    var self = this;
+    var args = [].slice.call(arguments);
+
+    timer = setTimeout(function() {
+      f.apply(self, args);
+    }, ms, args);
+  };
+};
+
+function throttle (f, ms) {
+	var timer;
+	var args;
+	var called = false;
+
+	return function() {	
+//				debugger;
+		var self = this;
+		args = [].slice.call(arguments);
+
+		if(timer) {
+			called = true;
+			return;
+		}
+
+		f.apply(self, args);
+
+		//рекурсивный вызов timeout вместо interval
+		timer = setTimeout(function runTimer() {
+//					debugger;
+			if(!called) {
+				timer = null;
+			}
+
+			if (timer && called) {
+				f.apply(self, args);
+				timer = setTimeout(runTimer, ms, args);
+			}
+
+			called = false;
+		}, ms, args);
+	};
+}
+
 
     // возвращает cookie с именем name, если есть, если нет, то undefined
 function getCookie(name) {
@@ -87,5 +136,7 @@ export default {
   nextIndexInArray,
   getCookie,
   setCookie,
-  deleteCookie
+  deleteCookie,
+	debounce,
+	throttle
 };
