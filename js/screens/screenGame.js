@@ -11,7 +11,7 @@ let _speedSpan;
 
 function getElem() {
 //  const elem = view.getElementFromTemplate(template);
-//  const button = elem.querySelector(`.main-play`);
+//  const button = elem.querySelector(`.button_start`);
 //  button.onclick = function () {
 //    view.renderScreen(`screenArtist`);
 //  };

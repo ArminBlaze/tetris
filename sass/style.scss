@@ -6,9 +6,10 @@ $pixel_borderWidth: 3px;
 $pixel_margin: 3px;
 $pixel_inner_margin: 3px;
 $pixel_opacity: 0.1;
+$tetris_font_color: white;
+$screen_font_color: black;
 
 $nextFigureTableSize: ($pixel_size + $pixel_borderWidth*2 + $pixel_margin)+$pixel_margin;
-
 
 
 body {
@@ -22,6 +23,7 @@ body {
 }
 
 .tetris {
+  margin-top: -100px;
 	display: inline-block;
 	vertical-align: top;
 	padding: 300px;
@@ -35,26 +37,27 @@ body {
     ;
   background-size: 4px 4px, auto, auto, auto;
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
-  background-position: 0%, 11% 47%, 210% 47%, 0%;
+  background-position: 0%, 11% 183px, 210% 183px, 0%;
 	box-sizing: border-box;
 	border: 3px solid black;
 	border-top-left-radius: 8%;
 	border-top-right-radius: 8%;
 	position: relative;
 
-//  transform: scale(0.5);
+  transform: scale(0.8);
   transform-origin: 50% 0;
 }
 
 .tetris:before {
   position: absolute;
   content: '';
-  border: 10px solid white;
+  border: 10px solid $tetris_font_color;
   border-top-color: transparent;
   top: 154px;
   left: 207px;
   right: 207px;
-  bottom: 229px;
+//  bottom: 229px;
+  height: 790px;
 }
 
 #board {
@@ -64,19 +67,16 @@ body {
   position: relative;
   background: $color_screen;
   box-shadow:
-//    inset -1px -1px 3px rgba(white, 0.3),
     inset -1px -1px 10px -2px rgba(black, 1),
     inset 10px 10px 3px rgba(black, 0.5);
   padding: 10px;
 	outline: inset 60px #53c5ff;
-//  border: 1px solid rgba(black, 0.7);
-//  border-bottom-color: rgba(white, 0.1);
-//  border-right-color: rgba(white, 0.1);
+  margin-bottom: 115px;
 }
 
 .tetris__title {
     position: absolute;
-    color: white;
+    color: $tetris_font_color;
     top: 94px;
     left: 0px;
     right: 0px;
@@ -168,7 +168,7 @@ body {
   top: 0;
   left: 0;
   font-size: 24px;
-  color: rgb(0, 0, 0);
+  color: $screen_font_color;
   display: inline-block;
   vertical-align: top;
 //  padding: 10px 20px;
@@ -176,20 +176,19 @@ body {
 //  outline: 1px solid lime;
 }
 
+//form {
+//  position: absolute;
+//  bottom: 0;
+//  right: 0;
+//  padding: 15px;
+//  background-color: rgb(83, 175, 19);
+//}
 
-form {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 15px;
-  background-color: rgb(83, 175, 19);
-}
-
-input {
-  background-color: rgb(152, 207, 113);
-  border-color: rgb(83, 175, 19);
-  font-size: 1em;
-}
+//input {
+//  background-color: rgb(152, 207, 113);
+//  border-color: rgb(83, 175, 19);
+//  font-size: 1em;
+//}
 
 .hit {
 /*  background: black;*/
@@ -234,6 +233,87 @@ input {
 //	outline: inherit;
 }
 
+.overlay__start {
+  display: flex;
+  margin: auto;
+}
+
+
+
+//Блок кнопок
+.buttons {
+  color: $tetris_font_color;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.buttons__block {
+}
+
+.buttons__block_start {
+  position: relative;
+}
+
+.button {
+  position: relative;
+  background: #fde32a;
+  padding: 10px;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  border: none;
+//  border: 2px solid black;
+  box-shadow: 0px 0px 0px 1px rgba(black, 1),
+              5px 5px 5px 0px rgba(black, 0.5);
+  box-shadow: inset 6px 6px 10px 1px rgba(255, 247, 184, 0.8),
+//    inset 2px 2px 3px #fff,
+    0 1px 0px 0px rgba(78, 72, 29, 0.3),
+    7px 7px 1px 0px rgba(82, 76, 30, 0.3),
+    0 -5px 4px 1px #e8cd02,
+    0 -5px 0px 3px rgba(0, 0, 0, 0.9);
+
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.button:active {
+     top: -4px;
+  box-shadow: inset 6px 6px 10px 1px rgba(255, 247, 184, 0.8),
+//    inset 2px 2px 3px #fff,
+    0 1px 0 rgba(78, 72, 29, 0.3),
+    3px 3px 1px 1px rgba(82, 76, 30, 0.3),
+    0 -2px 3px 0 #e3c902,
+    0 -1px 0px 3px rgba(0, 0, 0, 0.9);
+}
+
+.button:before {
+//  background: hsl(0, 0%, 100%);
+  background: hsl(200, 100%, 53%);
+  background: hsl(200, 0%, 53%);
+
+  background: $color_body;
+
+  border-top: 2px solid grayscale(darken($color_body, 22%));
+  border-radius: 50%;
+  box-shadow: inset 0 8px 48px grayscale(darken($color_body, 33%));
+  content: '';
+  display: block;
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: -3px;
+  bottom: -3px;
+  z-index: -1;
+}
+
+
+
+.button:active:before {
+
+}
+
 .hidden {
   display: none;
 }
@@ -254,7 +334,7 @@ input {
 .tetris_color1 .hit:before {
   background: transparent;
   content: ".";
-  color:transparent;
+  color: transparent;
 //    line-height: 16px;
   width: 90%;
   margin: 0 auto;
@@ -279,7 +359,7 @@ input {
 .tetris_color2 .hit:before {
   background: transparent;
   content: ".";
-  color:transparent;
+  color: transparent;
 //    line-height: 16px;
   width: 90%;
   margin: 0 auto;
