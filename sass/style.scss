@@ -279,12 +279,12 @@ body {
 }
 
 .button:active {
-     top: -4px;
+  top: -4px;
   box-shadow: inset 6px 6px 10px 1px rgba(255, 247, 184, 0.8),
 //    inset 2px 2px 3px #fff,
     0 1px 0 rgba(78, 72, 29, 0.3),
     3px 3px 1px 1px rgba(82, 76, 30, 0.3),
-    0 -2px 3px 0 #e3c902,
+    0 -2px 3px 1px #e3c902,
     0 -1px 0px 3px rgba(0, 0, 0, 0.9);
 }
 
