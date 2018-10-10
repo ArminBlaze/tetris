@@ -267,12 +267,12 @@ body {
   box-shadow: 0px 0px 0px 1px rgba(black, 1),
               5px 5px 5px 0px rgba(black, 0.5);
   box-shadow:
-    inset 1px 1px 10px 1px rgb(255, 236, 100),
+    inset 0px 6px 10px 1px hsla(53, 100%, 86%, 1),
     0 1px 0 rgba(78, 72, 29, 0.3),
-    0 6px 0 rgba(82, 76, 30, 0.3),
-    0 8px 4px 1px rgba(17, 17, 17, 0.3),
-    0px 4px 3px 2px rgba(26, 26, 26, 0.7),
-    inset 0 2px 3px #fff;
+    0 7px 0 rgba(82, 76, 30, 0.3),
+    0 8px 4px 1px #e3c902,
+    inset 0 2px 3px #fff,
+    0 9px 0px 2px rgba(black, 0.9);
 
   outline: none;
   cursor: pointer;
@@ -300,14 +300,16 @@ body {
 }
 
 .button:active {
-  top: 4px;
+  top: 8px;
   box-shadow:
-    inset 1px 1px 10px 1px rgb(255, 236, 100),
+
+  inset 0px 6px 10px 1px hsla(53, 100%, 86%, 1),
     0 1px 0 rgba(78, 72, 29, 0.3),
     0 2px 0 rgba(82, 76, 30, 0.3),
-    0 4px 3px 0 rgba(17, 17, 17, 0.3),
-    0px 0px 3px 2px rgba(26, 26, 26, 0.7),
-    inset 0 2px 3px #fff;
+    0 1px 3px 0 rgb(227, 201, 2),
+
+    inset 0 2px 3px #fff,
+    0 1px 0px 2px rgba(black, 0.9);
 }
 
 .button:active:before {
