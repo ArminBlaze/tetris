@@ -90,8 +90,15 @@ function throttleWithFirstDelay(f, key, ms, firstDelay) {
 let controller = {
   init() {
     let startButton = document.querySelector(`.button_start`);
+    let pauseButton = document.querySelector(`.button_pause`);
+
     startButton.onclick = function () {
+      model.init();
       model.startGame();
+    };
+
+    pauseButton.onclick = function () {
+      model.figure.pause();
     };
   },
 
