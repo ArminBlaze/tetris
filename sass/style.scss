@@ -33,7 +33,7 @@ body {
     repeating-linear-gradient(-45deg, rgba(255,255,255, 0.25), rgba(255,255,255, 0.25) 1px, transparent 1px, transparent 6px),
     url('../img/svg1.svg'),
     url('../img/svg2.svg'),
-    linear-gradient(45deg, #0477c5, $color_body),
+    linear-gradient(-45deg, #0477c5, $color_body),
     ;
   background-size: 4px 4px, auto, auto, auto;
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
