@@ -31,6 +31,7 @@ class Figure {
   }
 
   drawNextFigure() {
+    console.log(`drawNextFigure()`);
     // нужно рефрешить оконо след фигуры
     view.refreshNextFigure();
 
@@ -43,13 +44,14 @@ class Figure {
     this.table = new Table(this.rows, this.cells);
 
     let table = this.table.getElem();
-    let nextFigureScreen = document.querySelector(`.nextFigure__table`);
-    if (!nextFigureScreen) {
+//    let nextFigureScreen = document.querySelector(`.nextFigure__table`);
+//    debugger;
+    if (!view.nextFigureScreen) {
       return;
     }
 
-    nextFigureScreen.innerHTML = ``;
-    nextFigureScreen.appendChild(table);
+    view.nextFigureScreen.innerHTML = ``;
+    view.nextFigureScreen.appendChild(table);
 
     let coords = this.previewCoords || this.coords;
 

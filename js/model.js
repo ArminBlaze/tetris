@@ -260,6 +260,10 @@ let model = {
 
     // отрисовать следующую фигуру в окне след фигуры
 //    console.log(this.nextFigure);
+    if (!this.gameInProgress) {
+      return;
+    }
+
     this.nextFigure.drawNextFigure();
 
     // запускает таймер движения фигуры

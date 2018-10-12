@@ -19,6 +19,8 @@ let speedSpan = document.querySelector(`.info__speed`);
 
 
 let view = {
+  nextFigureScreen,
+
   init() {
 //    this.renderScreen(`screenStart`);
 //    this.showOverlay(`start`);
