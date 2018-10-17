@@ -149,6 +149,14 @@ class Figure {
   }
 
   move(direction) {
+
+
+    if (model.figure != this) {
+      console.log(model.figure);
+      console.log(this);
+      debugger;
+      console.log(`return!`);
+    }
 //    console.log(direction);
     let coords = this.currentCoords;
 //    console.log(coords);
@@ -170,7 +178,17 @@ class Figure {
 
       // создаём новую фигуру?
 //      метод model должен удалить фигуру и создать новую
-      model.generateFigure();
+
+      // задержка при генерации новой фигуры
+      debugger;
+      // удаляем текущую фигуру, чтобы остановить таймер движения фигуры и создаём новую фигуру с задержкой
+      this.destroy();
+
+      setTimeout(function () {
+        model.generateFigure();
+      }, 1000);
+
+//      model.generateFigure();
     }
 
   }
@@ -299,6 +317,7 @@ class Figure {
   destroy() {
     // убирает таймер и удаляет фигуру\
 //    console.log(`удаляем фигуру`, this);
+    model.figure = null;
     clearInterval(this.timer);
   }
 }

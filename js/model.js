@@ -227,9 +227,9 @@ let model = {
   // эта функция должна выбирать одну рандомную фигуру
   generateFigure() {
     // let figure = pickRandomFigure()
-    if (this.figure) {
-      this.figure.destroy();
-    }
+//    if (this.figure) {
+//      this.figure.destroy();
+//    }
 
     // если игра закончилась, ничего не создавать
     if (!this.gameInProgress) {

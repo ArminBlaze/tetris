@@ -152,6 +152,10 @@ let controller = {
   },
 
   keyUpdate() {
+    if (!model.figure) {
+      return;
+    }
+
     if (Key.isDown(Key.UP)) {
       debouncedRotateWithFirstDelay();
     }
