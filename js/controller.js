@@ -6,10 +6,12 @@ const rotateTick = 500;
 const rotateDelay = 500;
 
 function decorRotate() {
+  if(!model.figure) return;
   model.figure.rotate();
 }
 
 function decorMove(direction) {
+  if(!model.figure) return;
   model.figure.move(direction);
 }
 
@@ -152,6 +154,10 @@ let controller = {
   },
 
   keyUpdate() {
+    if (!model.figure) {
+      return;
+    }
+
     if (Key.isDown(Key.UP)) {
       debouncedRotateWithFirstDelay();
     }
