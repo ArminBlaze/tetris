@@ -15,7 +15,7 @@ ${highScore.record.map((item) => {
 </table>
 
 
-<button type="button" class="score__replay">Play again?</button>
+<button type="button" class="score__button">Удалить рекорды?</button>
 </div>`;
 
 function getElem() {
@@ -23,11 +23,18 @@ function getElem() {
   let score = model.score;
 
   const elem = view.getElementFromTemplate(template({record, score}));
-  const button = elem.querySelector(`.score__replay`);
+  const button = elem.querySelector(`.score__button`);
   button.onclick = function () {
-    model.init();
+//    model.init();
 //    view.renderScreen(`screenGame`);
-    model.startGame();
+
+    //кнопка должна удалять рекорды
+    model.deleteHighScore();
+
+    //и обновлять таблицу
+    let scoreElem = document.querySelector(`.score`);
+    scoreElem.innerHTML = `<h1 class="score__title score__title_center">Рекорды сброшены</h1>`;
+//    model.gameOver();
   };
 
 //  setTimeout(init, 0);

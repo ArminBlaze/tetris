@@ -110,10 +110,12 @@ let model = {
 //    this.record = utils.getCookie(`score1`);
   },
 
-  compareHighScore() {
+  deleteHighScore() {
     // удаляем таблицу рекордов
-//    utils.deleteCookie(this.HIGH_SCORES_NAME);
+    utils.deleteCookie(this.HIGH_SCORES_NAME);
+  },
 
+  compareHighScore() {
     // получить массив рекордов
     let score = this.score;
     let prevScores = this.getHighScoresArray();
@@ -168,7 +170,6 @@ let model = {
   },
 
   setHighScoresArray(arr) {
-    debugger;
     console.log(arr);
 
     arr = JSON.stringify(arr);
