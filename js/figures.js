@@ -4,6 +4,8 @@ import {controller} from './controller.js';
 import utils from './utils';
 import {Table} from './table.js';
 
+const delayBetweenFigures = 300;
+
 
 // Прототип с методами
 class Figure {
@@ -150,12 +152,10 @@ class Figure {
 
   move(direction) {
 
-
     if (model.figure != this) {
-      console.log(model.figure);
-      console.log(this);
       debugger;
       console.log(`return!`);
+      return;
     }
 //    console.log(direction);
     let coords = this.currentCoords;
@@ -180,13 +180,13 @@ class Figure {
 //      метод model должен удалить фигуру и создать новую
 
       // задержка при генерации новой фигуры
-      debugger;
+//      debugger;
       // удаляем текущую фигуру, чтобы остановить таймер движения фигуры и создаём новую фигуру с задержкой
       this.destroy();
 
       setTimeout(function () {
         model.generateFigure();
-      }, 1000);
+      }, delayBetweenFigures);
 
 //      model.generateFigure();
     }

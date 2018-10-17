@@ -6,10 +6,12 @@ const rotateTick = 500;
 const rotateDelay = 500;
 
 function decorRotate() {
+  if(!model.figure) return;
   model.figure.rotate();
 }
 
 function decorMove(direction) {
+  if(!model.figure) return;
   model.figure.move(direction);
 }
 
