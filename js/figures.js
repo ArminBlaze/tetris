@@ -395,8 +395,8 @@ class Leka extends Figure {
   }
 
   init() {
-    this.coords = [`0.0`, `1.0`, `2.0`, `2.1`];
-    this.rotatePosition = 0;
+    this.coords = [`1.0`, `1.1`, `1.2`, `0.2`];
+    this.rotatePosition = 3;
     this.rotateCoords = [
 			[`-2.+0`, `-1.-1`, `+0.-2`, `+1.-1`],
 			[`+1.+2`, `-0.+1`, `-1.+0`, `-0.-1`],
@@ -413,8 +413,9 @@ class LekaReverse extends Figure {
   }
 
   init() {
-    this.coords = [`0.1`, `1.1`, `2.1`, `2.0`];
-    this.rotatePosition = 0;
+//    this.coords = [`0.1`, `1.1`, `2.1`, `2.0`];
+    this.coords = [`1.2`, `1.1`, `1.0`, `0.0`];
+    this.rotatePosition = 1;
     this.rotateCoords = [
 			[`-1.+1`, `+0.-0`, `+1.-1`, `-0.-2`],
 			[`+2.+1`, `+1.+0`, `-0.-1`, `-1.+0`],
