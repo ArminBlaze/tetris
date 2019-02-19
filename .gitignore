@@ -1,12 +1,4 @@
-temp/
-.DS_Store
-.idea
-*.ai
-*.log
-*.pdf
-*.psd
-*.sublime*
-build/
-node_modules/
-npm-debug.*
-Thumbs.db
+*
+
+# исключить из игнора папку с содержимым
+!build/*
