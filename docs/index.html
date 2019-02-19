@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="tetris">
+    <h1 class="tetris__title">TETRIS</h1>
+    <div id="board">
+      <table id="table" class="screen"></table>
+      <div class="info" id="messageArea">
+        <div class="info__block">
+          Линии: <span class="info__score">0</span>
+        </div>
+        <div class="info__block">
+          Скорость: <span class="info__speed">0</span>
+        </div>
+        <div class="info__block">
+          <div class="nextFigure">
+            <table id="nextFigure__table" class="nextFigure__table">
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay overlay__start">
+
+      </div>
+
+      <div class="overlay overlay__score hidden">
+      </div>
+    </div>
+
+    <div class="buttons">
+      <div class="buttons__block buttons__block_reset">
+        <button type="button" class="button button_reset"></button>
+        <div>RESET</div>
+      </div>
+      <div class="buttons__block buttons__block_sound">
+        <button type="button" class="button button_sound"></button>
+        <div>SOUND</div>
+      </div>
+      <div class="buttons__block buttons__block_pause">
+        <button type="button" class="button button_pause"></button>
+        <div>PAUSE</div>
+      </div>
+      <div class="buttons__block buttons__block_start">
+        <button type="button" class="button button_start"></button>
+        <div>START</div>
+      </div>
+    </div>
+  </div>
+
+
+
+	<template style="display: none">
+    <tr class="screen__row"></tr>
+    <td class="screen__cell"></td>
+  </template>
+
+	<script src="js/main.js"></script>
+</body>
+</html>
